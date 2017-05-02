@@ -5,14 +5,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>登录界面</title>
+<link rel="stylesheet" href="../css/login.css">
 </head>
 
 <body>
 <!--该jsp页面主要实登录的功能，form中还需要有两个隐藏的参数Productid和flag-->
-	<form id="loginform" action="loginController.do" method="post">
-        <div>用户名<input type="text" name="Buyername" id="Buyername"></div><br>
-        <div>密码<input type="password" name="BuyerPassword" id="BuyerPassword"></div><br>
-        <input type="submit" value="登录">
+<div class="login">
+<%
+	if(request.getSession().getAttribute("eFlag") =="error") {
+		out.print("<div class='wrong'><p>用户名或密码错误</p></div>");
+		session.setAttribute("eFlag", "e");
+	}
+%>
+	<form id="loginform" action="../LoginController.do" method="post">
+		<div class="sign">
+        	<input type="text" placeholder="用户名" name="Buyername" id="Buyername"><br>
+        	<input type="password" placeholder="密码" name="BuyerPassword" id="BuyerPassword"><br>
+        	<input type="submit" value="登录">
+        	<a href="regist.jsp">注册</a>
+        </div>
     </form>
+</div>
 </body>
 </html>

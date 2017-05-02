@@ -9,6 +9,17 @@
 </head>
 
 <body>
+<div class="regist">
+<%
+	if(request.getSession().getAttribute("eFlag") =="error") {
+		out.print("<div class='wrong'><p>用户名已存在</p></div>");
+		session.setAttribute("eFlag", "e");
+	}
+	if(request.getSession().getAttribute("eFlag") =="error1") {
+		out.print("<div class='wrong'><p>密码不能为空</p></div>");
+		session.setAttribute("eFlag", "e");
+	}
+%>
 <!--该jsp页面主要实现用户注册    判断flag1是否==1，若等于1则提示用户名已存在，若flag2==1，则提示注册成功-->
 	<form id="regist" action="../RegController.do" method="post">
 		<div class="reg">
@@ -19,5 +30,6 @@
         	<input type="submit" value="注册">
         </div>
 	</form>
+	</div>
 </body>
 </html>
