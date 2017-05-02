@@ -21,14 +21,18 @@ public class ProductInfoController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		ProductModel product =(ProductModel)session.getAttribute("product");
-		ProductInfoService productservice=new ProductInfoService();
+		ProductInfoService productservice=new ProductInfoService();	
 		try {
-			productservice.getProduct(product.getProductid());
+			product=productservice.getProduct(product.getProductid());
+			session.setAttribute("product", product);
+			//response.sendRedirect("/jsp/productInfo.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		String path=request.getContextPath(); 
+		response.sendRedirect(path+"/jsp/productInfo.jsp");
 		//test
 		//产品信息控制器，根据Productid调用ProductInfoService类的getProduct(int Productid)方法获取商品信息
 		//获得ProductModel对象，传递参数并跳转到productInfo.jsp显示产品信息

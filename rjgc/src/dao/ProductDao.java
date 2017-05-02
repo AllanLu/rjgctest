@@ -18,15 +18,13 @@ public class ProductDao {
 	String sql="";
 	private Connection conn;
 	/*获取完整产品对象*/
-	public ProductModel getProductByProductid(ProductModel product) throws SQLException {
+	public ProductModel getProductByProductid(int productid) throws SQLException {
 		try {
-			sql = "select * from Product where Productid='"+product.getProductid()+"'";
-			//Context ctx=new InitialContext();//连接数据库的方法，数据库连接池，配置文件在tomcat\conf\Catalina\localhost\rjgc。xml
-			//DataSource ds=(DataSource)ctx.lookup("java:/comp/envbc/rjgc");
-			//Connection conn=ds.getConnection();
-			conn=GetConnection.getConnection();
-			Statement stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery(sql);
+			sql = "select * from Product where Productid=?";
+			conn=GetConnection.getConnection();			
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, productid);									
+			ResultSet rs=pstmt.executeQuery();//error
 			if (rs.next()) {
 				ProductModel productinfo = new ProductModel();
 				productinfo.setProductid(rs.getInt("Productid"));
@@ -39,15 +37,15 @@ public class ProductDao {
 				productinfo.setSupplierid(rs.getString("Supplierid"));
 				productinfo.setStocknum(rs.getInt("Stocknum"));
 				productinfo.setStoredid(rs.getString("Storedid"));
-				
-				//user.setRegion(rs.getString("Buyerregion"));
+				if (productid==0) System.out.println("error22");else System.out.println("ok22");
 				rs.close();
-				stmt.close();
+				pstmt.close();
 				conn.close();
-				return product;
+				if (productinfo.equals(null)) System.out.println("error1");else System.out.println("ok1");
+				return productinfo;
 			} else {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 				conn.close();
 				return null;
 			}
