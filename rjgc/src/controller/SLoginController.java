@@ -30,6 +30,8 @@ public class SLoginController extends HttpServlet {
 		try {
 			flag=supllierservice.SLoginInfoCheck(Suppliername, SupplierPassword);
 			if (flag) {
+				supplier.setSuppliername(Suppliername);
+				supplier.setSupplierPassword(SupplierPassword);
 				supplier = supplierdao.getSupplier(supplier);
 				HttpSession session = request.getSession();
 				System.out.println("g"); 

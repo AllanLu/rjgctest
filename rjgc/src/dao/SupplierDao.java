@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.ProductModel;
 import model.SupplierModel;
 
 public class SupplierDao{
@@ -38,6 +39,25 @@ public class SupplierDao{
 	/*获取完整商家对象*/
 	public SupplierModel getSupplier(SupplierModel supplier) throws SQLException {
 		//根据用户名从supplier表中获取完整商家对象
+		conn=GetConnection.getConnection();
+		try{
+			sql="select * from Supplier where Suppliername=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, supplier.getSuppliername());
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				supplier.setSupplierid(rs.getInt("Supplierid"));
+				supplier.setSupplieraddress(rs.getString("Supplieraddress"));
+				supplier.setSupplierintroduction(rs.getString("Supplierintroduction"));
+				supplier.setSuppliertel(rs.getString("Suppliertel"));
+			}
+		rs.close();
+		pstmt.close();
+		conn.close();
 		return supplier;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
 	}
 }
