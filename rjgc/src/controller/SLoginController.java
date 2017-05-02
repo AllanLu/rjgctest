@@ -45,7 +45,7 @@ public class SLoginController extends HttpServlet {
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				//µÇÂ¼Ê§°Ü£¬·µ»ØµÇÂ¼´íÎó
-				System.out.println("gg");
+				System.out.println("g");
 				out.println("<html>");
 				out.println("<head>");
 				out.println("<script type=\"text/javascript\">");

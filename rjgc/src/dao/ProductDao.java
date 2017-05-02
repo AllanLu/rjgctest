@@ -60,9 +60,38 @@ public class ProductDao {
 	public List<ProductModel> getProductBySupplierid(int Supplierid){
 		List<ProductModel> productList =new ArrayList<ProductModel>();
 		//调用getProductByProductid(ProductModel product)方法获取完整产品信息
-		return productList;
-	}
-	
+		conn=GetConnection.getConnection();
+		try{
+			sql="select * from Product where Supplierid=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, Supplierid);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				ProductModel product=new ProductModel();
+				product.setProductid(rs.getInt("Productid"));
+				product.setProductname(rs.getString("Productname"));
+				product.setProductorigin(rs.getString("Productorigin"));
+				product.setProductdate(rs.getString("Productdate".toString()));
+				product.setProductintroduction(rs.getString("Productintroduction"));
+				product.setProductprice(rs.getFloat("Productprice"));
+				product.setSupplierid(rs.getString("Supplierid"));
+				product.setStocknum(rs.getInt("Stocknum"));
+				product.setStoredid(rs.getString("Storedid"));
+				productList.add(product);
+			}
+			if(!productList.isEmpty()){
+				return productList;
+				//request.getSession().setAttribute("productList",productList);
+				//response.sendRedirect("/rjgc/jsp/index.jsp");
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
+	}	
 	public boolean addProductToProduct(ProductModel product){
 		boolean i=false;
 		//将product中的数据加入Product表中
