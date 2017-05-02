@@ -56,4 +56,13 @@ public class ProductInfoService {
 		return -1;
 	}
 
+	public ProductModel getProduct(int Productid) throws SQLException{
+		ProductModel product = new ProductModel();
+		ProductDao pd=new ProductDao();
+		product.setProductid(Productid);
+		product=pd.getProductByProductid(product);
+		
+		//将Productid写到product中，并调用getProductByProductid(ProductModel product)方法获取完整产品信息
+		return product;
+	}
 }
