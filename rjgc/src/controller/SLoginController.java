@@ -31,7 +31,7 @@ public class SLoginController extends HttpServlet {
 			if (flag) {
 				supplier = supplierdao.getSupplier(supplier);
 				HttpSession session = request.getSession();
-				System.out.println("g");
+				System.out.println("gg");
 				session.setAttribute("supplier", supplier);
 				//登录成功，根据flag跳转到对应的页面或Servlet，此模块还需要有代码补充
 				response.sendRedirect("/sIndexController.do");
