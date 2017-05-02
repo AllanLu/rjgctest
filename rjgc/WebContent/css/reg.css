@@ -1,0 +1,65 @@
+body{
+	background-image:url(../images/timg.jpg);
+	background-size:100%;
+}
+
+.reg {
+ 	position: absolute;
+ 	top: 20%;
+ 	left: 75%;
+ 	height: 400px;
+ 	width: 260px;
+ 	padding: 10px;
+ 	background-color:white;
+ 	border-radius:8px;
+}
+.reg input[type=text] {
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #32cf42;
+    border-radius: 2px;
+    color: #32cf42;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top:35px;
+    margin-left:23px;
+}
+
+.reg input[type=password] {
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #32cf42;
+    border-radius: 2px;
+    color: #32cf42;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top: 30px;
+    margin-left:23px;
+}
+
+.reg input[type=submit] {
+    width: 210px;
+    height: 38px;
+    background: #32cf42;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 6px;
+    margin-top: 30px;
+    margin-left:23px;
+}
+.reg a {
+	color: #32cf42;
+	padding: 10px;
+    margin-top: 30px;
+}

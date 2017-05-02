@@ -1,0 +1,68 @@
+body{
+	background-image:url(../images/timg.jpg);
+	background-size:100%;
+}
+
+.login {
+ 	position: absolute;
+ 	top: 30%;
+ 	left: 75%;
+ 	height: 250px;
+ 	width: 260px;
+ 	padding: 10px;
+ 	background-color:white;
+ 	border-radius:8px;
+}
+
+.sign input[type=text] {
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #32cf42;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top:35px;
+    margin-left:23px;
+}
+
+.sign input[type=password] {
+    width: 200px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #32cf42;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top: 30px;
+    margin-left:23px;
+}
+
+.sign input[type=submit] {
+    width: 150px;
+    height: 35px;
+    background: #32cf42;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 6px;
+    margin-top: 30px;
+    margin-left:23px;
+}
+.sign a {
+	color: #32cf42;
+	padding: 10px;
+    margin-top: 30px;
+}
+.sign input[type=submit]:hover{background-color:#ff8000;
+color:white;}
