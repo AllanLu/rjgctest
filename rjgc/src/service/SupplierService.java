@@ -18,7 +18,7 @@ public class SupplierService {
 			PreparedStatement ps=conn.prepareStatement(sql);
 			ps.setString(1,sName);
 			ResultSet rst=ps.executeQuery();
-			//判断各种情况
+			//判断各种情况。
 			if(rst.next()){
 				return -1;
 			}else{
