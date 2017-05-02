@@ -17,7 +17,7 @@ import javax.servlet.http.Part;
 import model.*;
 import service.*;
 /**
- * �̼��¼���Ʒ
+ * 商家新加商品
  */
 @WebServlet("/addproduct.do")
 @MultipartConfig
@@ -33,12 +33,13 @@ public class AddProductController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//����jspҳ�洫�͵�����
-		String path="../images/";
-	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";
+		//接受jsp页面传送的数据
+		String path="../images/";//调用路径
+	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";//存储路径
 		HttpSession session=request.getSession();
-		Part image=request.getPart("image");
+		Part image=request.getPart("image");//获得图片文件
 		String message="";
+		//获得商品的信息
 		String productName=request.getParameter("productName");
 		String origin=request.getParameter("origin");
 		String date=request.getParameter("date");
@@ -47,26 +48,29 @@ public class AddProductController extends HttpServlet {
 		String introduction=request.getParameter("introduction");
 		String storedid=request.getParameter("storedid");
 		String stockNum=request.getParameter("stockNum");
-		int sid=(int)session.getAttribute("Supplierid");
+		//取得sid
+		SupplierModel sModel=(SupplierModel)session.getAttribute("supplier");
+		int sid=sModel.getSupplierid();
 		
-		if(image==null){
-			message="ȱ��ͼƬ�ļ�";
+		if(image==null){//判断图片是否存在
+			message="缺少图片文件";
 			session.setAttribute("message", message);
 			session.setAttribute("flag", true);
 			response.sendRedirect("jsp/supplierAddProduct.jsp");
-		}else if(image.getSize()>3*1024*1024) {
+		}else if(image.getSize()>3*1024*1024) {//判断大小是否超标
 			image.delete();
-			message="ͼƬ�ļ�̫��������ѡ��";
+			message="图片文件太大，请重新选择";
 			session.setAttribute("message", message);
 			session.setAttribute("flag", true);
 			response.sendRedirect("jsp/supplierAddProduct.jsp");
-		//�������ݿ���ô洢���̣������ͼƬ
+		//连接数据库调用存储过程，并存放图片
 		}else{
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//获取当前时间
 			//SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=df.format(new Date());
 			path=path+sid+"_"+time+".jpg";
-			imagePath=imagePath+sid+"_"+time+".jpg";
+			imagePath=imagePath+sid+"_"+time+".jpg";//文件名格式：sid_20XX05XX10XX00.jpg
+			//封装
 			ProductModel pModel=new ProductModel();
 			pModel.setProductdate(date);
 			pModel.setProductname(productName);
@@ -78,18 +82,20 @@ public class AddProductController extends HttpServlet {
 			pModel.setStocknum(Integer.parseInt(stockNum));
 			pModel.setStoredid(storedid);
 			pModel.setProductintroduction(introduction);
+			//调用添加商品的服务类方法
 			ProductInfoService pService=new ProductInfoService();
 			int stat=pService.addProductToProduct(pModel);
+			//判断返回值
 			if(stat==0){
 				File file=new File(imagePath);
 				file.createNewFile();
 				image.write(imagePath);
-				message="��Ϸ�����ɹ���";
+				message="游戏发布成功！";
 				session.setAttribute("message", message);
 				session.setAttribute("flag", true);
 				response.sendRedirect("jsp/supplierindex.jsp");
 			}else{
-				message="����ʧ��";
+				message="添加失败";
 				session.setAttribute("message", message);
 				session.setAttribute("flag", true);
 				response.sendRedirect("jsp/supplierAddProduct.jsp");

@@ -1,8 +1,8 @@
 package model;
 
 public class ProductModel {
-	//列出类中的成员变量
-	//参照UserModel类，为类的每个成员变量定义get和set方法
+	//锟叫筹拷锟斤拷锟叫的筹拷员锟斤拷锟斤拷
+	//锟斤拷锟斤拷UserModel锟洁，为锟斤拷锟矫匡拷锟斤拷锟皆憋拷锟斤拷锟斤拷锟斤拷锟絞et锟斤拷set锟斤拷锟斤拷
 	private int Productid;
 	private String Productname ;
 	private String Productorigin ;
@@ -14,11 +14,11 @@ public class ProductModel {
 	private int Stocknum ;
 	private String Storedid ;
 	private String Image;
-	public String getImage() {
+	public String getImage(){
 		return Image;
 	}
-	public void setImage(String image) {
-		Image = image;
+	public void setImage(String image){
+		Image=image;
 	}
 	public int getProductid() {
 		return Productid;

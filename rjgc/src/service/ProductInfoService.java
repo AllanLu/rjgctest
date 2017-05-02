@@ -10,11 +10,15 @@ import java.text.SimpleDateFormat;
 import dao.*;
 
 public class ProductInfoService {
+	/**
+	 * 向数据库中添加商品信息
+	 * @param pModel
+	 * @return
+	 */
 	public int addProductToProduct(ProductModel pModel){
 		java.sql.Connection conn =null;
 		ProductDao pDao=new ProductDao();
-		SupplierModel supplier=new SupplierModel();
-		SupplierDao sd=new SupplierDao();
+		conn=pDao.getConnection();
 		String productName=pModel.getProductname();
 		String origin=pModel.getProductorigin();
 		String pdate=pModel.getProductdate();

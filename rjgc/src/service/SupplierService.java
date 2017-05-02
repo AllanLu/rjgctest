@@ -6,22 +6,30 @@ import java.sql.SQLException;
 import model.*;
 import dao.*;
 public class SupplierService {
-	//ÁÖ×é
+	/**
+	 * ä¾›åº”å•†æ³¨å†Œçš„æ•°æ®åº“æ“ä½œ
+	 * @param sModel
+	 * @return
+	 */
 	public int SupplierRegister(SupplierModel sModel){
 		java.sql.Connection conn =null;
+		//è·å¾—æ•°æ®åº“è¿æ¥
+		ProductDao pDao=new ProductDao();
+		conn=pDao.getConnection();
+		//è·å¾—æ³¨å†Œä¿¡æ¯
 		String sName=sModel.getSuppliername();
 		String password=sModel.getSupplierPassword();
-		GetConnection pDao=new GetConnection();
-		conn=pDao.getConnection();
+		//æŸ¥æ‰¾æ˜¯å¦å­˜åœ¨é‡å¤ç”¨æˆ·å
 		String sql="select Supplierid from supplier where Suppliername=?";
 		try {
 			PreparedStatement ps=conn.prepareStatement(sql);
 			ps.setString(1,sName);
 			ResultSet rst=ps.executeQuery();
-			//ÅĞ¶Ï¸÷ÖÖÇé¿ö¡£
+			//åˆ¤æ–­å„ç§æƒ…å†µ
 			if(rst.next()){
 				return -1;
 			}else{
+				//ä¸é‡å¤çš„è¯å‘è¡¨ä¸­æ’å…¥ç”¨æˆ·ä¿¡æ¯
 				sql="insert into supplier(Suppliername,Supplierpassword)values(?,?)";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, sName);
@@ -31,6 +39,7 @@ public class SupplierService {
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, sName);
 				rst=ps.executeQuery();
+				//è·å¾—sidå¹¶è¿”å›
 				if(rst.next()){
 					int sid=rst.getInt("Supplierid");
 					return sid;
@@ -47,27 +56,76 @@ public class SupplierService {
 		}
 		return -2;
 	}
-	
-
-	
-	//Âí×é
-		public boolean SLoginInfoCheck(String Suppliername,String SupplierPassword) throws SQLException {
-			boolean i = false;
-			SupplierModel supplier=new SupplierModel();
-			SupplierDao sd=new SupplierDao();
-			supplier.setSuppliername(Suppliername);
-			supplier.setSupplierPassword(SupplierPassword);
-			i=sd.SLoginCheck(supplier);
-			//µ÷ÓÃSupplierDaoÖĞµÄSLoginCheck·½·¨£¬ÑéÖ¤supplier±íÖĞÊÇ·ñÓĞÊäÈëµÄÉÌ¼Ò
-			return i;
+	/**
+	 * ä¿®æ”¹å•†æˆ·ä¿¡æ¯
+	 * @param sModel
+	 * @return
+	 */
+	public SupplierModel SupplierModify(SupplierModel sModel){
+		java.sql.Connection conn =null;
+		//è·å¾—æ•°æ®åº“è¿æ¥
+		ProductDao pDao=new ProductDao();
+		conn=pDao.getConnection();
+		//æå–sid
+		int sid=sModel.getSupplierid();
+		String sname=null;
+		String stel=null;
+		String sintro=null;
+		String spw=null;
+		String saddr=null;
+		//å…ˆå–å‡ºåŸæœ‰ä¿¡æ¯
+		String sql="select * from supplier where Supplierid=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, sid);
+			ResultSet rst=ps.executeQuery();
+			if(!rst.next()){
+				return null;
+			}else{
+				sname=rst.getString(2);
+				stel=rst.getString(3);
+				saddr=rst.getString(4);
+				sintro=rst.getString(5);
+				spw=rst.getString(6);
+			}
+			//åˆ¤æ–­ä¿®æ”¹ä¿¡æ¯æ˜¯å¦ä¸ºnullï¼Œå¯†ç æ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºæ—¶ä¸ä¿®æ”¹
+			if(sModel.getSupplieraddress()!=null){
+				saddr=sModel.getSupplieraddress();
+			}
+			if(sModel.getSupplierintroduction()!=null){
+				sintro=sModel.getSupplierintroduction();
+			}
+			if(sModel.getSuppliertel()!=null){
+				stel=sModel.getSuppliertel();
+			}
+			if(sModel.getSupplierPassword()!=null&&sModel.getSupplierPassword()!=""){
+				spw=sModel.getSupplierPassword();
+			}
+			//æ›´æ–°æ•°æ®åº“
+			sql="update supplier set Suppliername=?,Suppliertel=?,Supplieraddress=?,Supplierintroduction=?,SupplierPassword=? where Supplierid=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, sname);
+			ps.setString(2, stel);
+			ps.setString(3, saddr);
+			ps.setString(4, sintro);
+			ps.setString(5, spw);
+			ps.setInt(6, sid);
+			//å°†ä¿®æ”¹åçš„æ•°æ®è¿”å›
+			if(!ps.execute()){
+				sModel.setSuppliername(sname);
+				sModel.setSuppliertel(stel);
+				sModel.setSupplieraddress(saddr);
+				sModel.setSupplierintroduction(sintro);
+				sModel.setSupplierPassword(spw);
+				return sModel;
+			}else{
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public SupplierModel getSupplierByName(String Suppliername) throws SQLException {
-			SupplierModel supplier=new SupplierModel();
-			//°ÑSuppliername¼ÓÈësupplier¶ÔÏóÖĞ
-			//µ÷ÓÃSupplierDaoµÄgetSupplier(SupplierModel supplier)·½·¨»ñÈ¡ÍêÕûÉÌ¼Ò¶ÔÏó
-			return supplier;
-		}
-	
+		return null;
+	}
 	
 }

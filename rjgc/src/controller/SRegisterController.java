@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import model.*;
 import service.*;
 /**
- * ��Ӧ��ע��
+ * 供应商注册
  */
 @WebServlet("/SRegister.do")
 public class SRegisterController extends HttpServlet {
@@ -30,25 +30,27 @@ public class SRegisterController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		String rgmessage=null;
+		String rgmessage=null;//存储给页面的消息
 		String sName=request.getParameter("suppliername");
 		String password=request.getParameter("password");
-		SupplierModel sModel=new SupplierModel();
+		SupplierModel sModel=new SupplierModel();//封装
 		sModel.setSuppliername(sName);
 		sModel.setSupplierPassword(password);
 		SupplierService ss=new SupplierService();
-		int sid=ss.SupplierRegister(sModel);//����ע�����
+		int sid=ss.SupplierRegister(sModel);//调用注册服务
+		sModel.setSupplierid(sid);
+		//判断返回值的各种情况
 		if(sid>=0){
-			session.setAttribute("Supplierid", sid);
-			session.setAttribute("Suppliername", sName);
+			//返回正常sid，注册成功，转到主页
+			session.setAttribute("supplier", sModel);
 			response.sendRedirect("jsp/supplierindex.jsp");
 		}else if(sid==-1){
-			rgmessage="�û����Ѵ���";
+			rgmessage="用户名已存在";
 			session.setAttribute("rgmessage", rgmessage);
 			session.setAttribute("flag",true);
 			response.sendRedirect("jsp/supplierRegister.jsp");
 		}else{
-			rgmessage="���ݿ����";
+			rgmessage="数据库错误";
 			session.setAttribute("rgmessage", rgmessage);
 			session.setAttribute("flag",true);
 			response.sendRedirect("jsp/supplierRegister.jsp");
