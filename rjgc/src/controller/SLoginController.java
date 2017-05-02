@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,11 @@ public class SLoginController extends HttpServlet {
 				System.out.println("gg");
 				session.setAttribute("supplier", supplier);
 				//登录成功，根据flag跳转到对应的页面或Servlet，此模块还需要有代码补充
-				response.sendRedirect("/sIndexController.do");
+				
+				//response.sendRedirect("/sIndexController.do");修改为如下可以跳转
+				RequestDispatcher rd = request.getRequestDispatcher("/sIndexController.do");
+				rd.forward(request,response);
+				
 			} else {
 				HttpSession session = request.getSession();
 				response.setContentType("text/html;charset=utf-8");
