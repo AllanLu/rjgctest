@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ProductModel;
 
-@WebServlet(urlPatterns = {"/confirmOrderController.do"})
+@WebServlet(urlPatterns = {"/oldconfirmOrderController.do"})
 public class OldConfirmOrderController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
