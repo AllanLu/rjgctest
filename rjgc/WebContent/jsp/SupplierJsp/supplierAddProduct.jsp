@@ -1,9 +1,12 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+	%>
 <html>
 <head>
-<title>发布游戏</title>
+<title>发布商品</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -11,14 +14,14 @@
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
 <!-- Bootstrap Core CSS -->
-<link href="../css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="<%=path%>/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="../css/style.css" rel='stylesheet' type='text/css' />
+<link href="<%=path%>/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="../css/morris.css" type="text/css" />
 <!-- Graph CSS -->
-<link href="../css/font-awesome.css" rel="stylesheet">
+<link href="<%=path%>/css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
-<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="<%=path%>/js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400'
@@ -38,7 +41,7 @@
 
 				<!--header end here-->
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="">主页</a><i
+					<li class="breadcrumb-item"><a href="supplierIndex.jsp">主页</a><i
 						class="fa fa-angle-right"></i></li>
 				</ol>
 				<div class="inbox-mail">
@@ -201,10 +204,10 @@
 				});
 	</script>
 	<!--js -->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="<%=path%>/js/jquery.nicescroll.js"></script>
+	<script src="<%=path%>/js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="<%=path%>/js/bootstrap.min.js"></script>
 	<!-- /Bootstrap Core JavaScript -->
 
 </body>
