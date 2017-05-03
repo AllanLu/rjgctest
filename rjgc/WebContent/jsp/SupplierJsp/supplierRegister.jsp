@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+    String path = request.getContextPath();
+	%>
 <html>
 <head>
 <title>供应商注册</title>
@@ -11,15 +14,15 @@
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
 <!-- Bootstrap Core CSS -->
-<link href="../css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="<%=path%>/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="../css/style.css" rel='stylesheet' type='text/css' />
+<link href="<%=path%>/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="../css/morris.css" type="text/css" />
 <!-- Graph CSS -->
-<link href="../css/font-awesome.css" rel="stylesheet">
+<link href="<%=path%>/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/jquery-ui.css">
 <!-- jQuery -->
-<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="<%=path%>/js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400'
