@@ -24,12 +24,12 @@ public class ShoppingCartController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
+		UserModel user=new UserModel();
 		HttpSession session = request.getSession();
-		UserModel user =(UserModel)session.getAttribute("user");
+		user =(UserModel)session.getAttribute("user");
 		List<ShoppingcartModel> shop=new ArrayList<ShoppingcartModel>();
-		int userid=user.getId();
-		ProductInfoService productservice=new ProductInfoService();	
-		shop=productservice.getProductList(userid);
+		ProductInfoService productservice=new ProductInfoService();
+		shop=productservice.getProductList(user.getName());
 		session.setAttribute("shop", shop);
 		String path=request.getContextPath(); 
 		response.sendRedirect(path+"/jsp/shoppingcart.jsp");

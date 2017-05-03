@@ -5,7 +5,7 @@ public class ShoppingcartModel {
     private int Productid;
     private int Productnum;
     private float Productprice;
-    
+    private String Buyername;
     public int getBuyerid() {
 		return Buyerid;
 	}
@@ -34,4 +34,14 @@ public class ShoppingcartModel {
 	public void setProductprice(float productprice) {
 		Productprice = productprice;
 	}
+	
+	public String getBuyername(){
+		return Buyername;
+		
+	}
+	public void setBuyername(String buyername) {
+		Buyername = buyername;
+	}
+	
+	
 }

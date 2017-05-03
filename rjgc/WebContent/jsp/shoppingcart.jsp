@@ -80,14 +80,14 @@ body,td,th {
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
   <p>&nbsp;</p>
   <% UserModel user = (UserModel)request.getSession().getAttribute("user");
- ArrayList<ShoppingcartModel> shop=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
+ ArrayList<ShoppingcartModel> shoplist=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");
-for(ShoppingcartModel shoppingcart:shop){
+for(ShoppingcartModel shoppingcart:shoplist){
 %>
 <div class="shop">
 <p><%= shoppingcart.getProductid() %></p>
 <p><%= shoppingcart.getProductnum() %></p>
-//<p><%= shoppingcart.getProductprice() %></p>
+
 </div>
 <%
 }%>
