@@ -16,12 +16,18 @@
 <% UserModel user = (UserModel)request.getSession().getAttribute("user");
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");%>
 <div class="product">
+<<<<<<< HEAD
 <img border="0" src="<%= product.getImagepath() %>" height=200px width=250px/>
+=======
+<img border="0"  src="../images/<%= product.getImagepath() %>" height=150px width=150px/>
+>>>>>>> branch 'master' of git@github.com:AllanLu/rjgctest.git
 <p><%= product.getProductid() %></p>
 <p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>
-<p><%= product.getProductdate() %></p>
 <p><%= product.getProductprice() %></p>
+<p><%= product.getProductdate() %></p>
+<p><%= product.getProductlife() %></p>
+<p><%= product.getStocknum() %></p>
 <p><%= product.getProductintroduction() %></p>
 <p><%= product.getSupplierid() %></p>
 </div>
