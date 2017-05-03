@@ -38,7 +38,9 @@
 <% UserModel user = (UserModel)request.getSession().getAttribute("user");
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");%>
 <div class="product">
+<div class="left">
 <div class="image"><img class="border="0"  src="rjgc/<%= product.getImagepath() %>" width=250px/></div>
+</div>
 <div class="info">
 <p>商品名称: <%= product.getProductname() %></p>
 <p>商品源: <%= product.getProductorigin() %></p>

@@ -2,11 +2,17 @@
     margin: auto;
     left: 12%;
     width: 70%;
-    height: 800px;
+    height: 90%;
     border: 0px solid;
     padding: 10px;
 }
-
+.left{
+	position:relative;
+	margin-top:0%;
+	margin-left:10%;
+	float:left;
+	height:50%;
+}
 .image {
  	position: relative;
     left: 21%;
@@ -18,20 +24,16 @@
 
 .info {
  	position: relative;
-    left: 50%;
-    top: -20%;
- 	height: 200px;
- 	width: 50%;
- 	padding: 10px;
- 	background: transparent;
+    margin-left:50%;
+    margin-top:3%;
 }
 
 .detail {
 	margin: auto;
 	position: relative;
-	left: 13%;
+	left: 14%;
 	width: 28%;
-    top: -5%;
+    top: 0%;
     background: transparent;
-    padding: 10px;
+    clean:left;
 }
