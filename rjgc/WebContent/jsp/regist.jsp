@@ -28,6 +28,7 @@
         	<input type="text" placeholder="手机号" name="BuyerTelephone" id="BuyerTelephone"><br>
         	<input type="text" placeholder="地址" name="BuyerAddress" id="BuyerAddress"><br>
         	<input type="submit" value="注册">
+        	<a href="index.jsp">首页</a>
         </div>
 	</form>
 	</div>
