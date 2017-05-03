@@ -1,15 +1,23 @@
 package service;
 import model.*;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.IOException;
 
+import javax.servlet.*;
+import javax.servlet.http.*;
 import dao.*;
 
 public class ProductInfoService {
+	private Connection conn0;
 	public int addProductToProduct(ProductModel pModel){
 		java.sql.Connection conn =null;
 		ProductDao pDao=new ProductDao();
@@ -64,4 +72,68 @@ public class ProductInfoService {
 		//将Productid写到product中，并调用getProductByProductid(ProductModel product)方法获取完整产品信息
 		return product;
 	}
+	//根据userid 查询购物车
+	public List<ShoppingcartModel> getProductList(int Userid){
+		String sql="";
+		List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
+		conn0=GetConnection.getConnection();
+		try{
+			sql="select * from Shoppingcart where userid=?";
+			PreparedStatement pstmt=conn0.prepareStatement(sql);
+			pstmt.setInt(1, Userid);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				ShoppingcartModel shopping=new ShoppingcartModel();
+				shopping.setBuyerid(rs.getInt("Buyerid"));
+				shopping.setProductid(rs.getInt("Productid"));
+				shopping.setProductnum(rs.getInt("Productnum"));
+				shopping.setProductprice(rs.getFloat("Productdate"));
+				shoppingcartlist.add(shopping);
+			}
+			if(!shoppingcartlist.isEmpty()){
+				return shoppingcartlist;
+				//request.getSession().setAttribute("productList",productList);
+				//response.sendRedirect("/rjgc/jsp/index.jsp");
+			}
+			rs.close();
+			pstmt.close();
+			conn0.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
+		}
+	
+	public ArrayList<ShoppingcartModel> Getall(){
+		String sql="";
+		conn0=GetConnection.getConnection();
+		ArrayList<ShoppingcartModel> shoppingcartList=null;
+		shoppingcartList=new ArrayList<ShoppingcartModel>();
+		try{
+			sql="select * from Shoppingcart";
+			PreparedStatement pstmt=conn0.prepareStatement(sql);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				ShoppingcartModel shopping=new ShoppingcartModel();
+				shopping.setBuyerid(rs.getInt("Buyerid"));
+				shopping.setProductid(rs.getInt("Productid"));
+				shopping.setProductnum(rs.getInt("Productnum"));
+				shopping.setProductprice(rs.getFloat("Productdate"));
+				shoppingcartList.add(shopping);
+			}
+			if(!shoppingcartList.isEmpty()){
+				return shoppingcartList;
+				//request.getSession().setAttribute("productList",productList);
+				//response.sendRedirect("/rjgc/jsp/index.jsp");
+			}
+			rs.close();
+			pstmt.close();
+			conn0.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
+		}
+		//获取购物车列表
+		
 }

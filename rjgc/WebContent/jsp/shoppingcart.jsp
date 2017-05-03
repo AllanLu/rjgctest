@@ -1,4 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="model.ProductModel" %>
+<%@ page import="model.UserModel" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.*" %>
+<%@ page import="dao.ProductDao" %>
+<%@ page import="model.ShoppingcartModel" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -72,5 +79,17 @@ body,td,th {
   <input name="button3" type="submit" class="首页" id="button3" value="返回首页" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
   <p>&nbsp;</p>
+  <% UserModel user = (UserModel)request.getSession().getAttribute("user");
+ ArrayList<ShoppingcartModel> shop=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
+ProductModel product =(ProductModel)request.getSession().getAttribute("product");
+for(ShoppingcartModel shoppingcart:shop){
+%>
+<div class="shop">
+<p><%= shoppingcart.getProductid() %></p>
+<p><%= shoppingcart.getProductnum() %></p>
+//<p><%= shoppingcart.getProductprice() %></p>
+</div>
+<%
+}%>
 </body>
 </html>

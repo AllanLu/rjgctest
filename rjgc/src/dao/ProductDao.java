@@ -37,11 +37,9 @@ public class ProductDao {
 				productinfo.setSupplierid(rs.getString("Supplierid"));
 				productinfo.setStocknum(rs.getInt("Stocknum"));
 				productinfo.setStoredid(rs.getString("Storedid"));
-				if (productid==0) System.out.println("error22");else System.out.println("ok22");
 				rs.close();
 				pstmt.close();
 				conn.close();
-				if (productinfo.equals(null)) System.out.println("error1");else System.out.println("ok1");
 				return productinfo;
 			} else {
 				rs.close();
