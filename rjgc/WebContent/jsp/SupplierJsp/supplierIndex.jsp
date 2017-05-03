@@ -30,7 +30,7 @@
 %>
 </div>
 <div class="title">
-<a href="#"><img border="0" src="../images/1.png" height=150px width=150px/></a>
+<a href="#"><img border="0" src="../../images/1.png" height=150px width=150px/></a>
 <h1>计 1 4 1 支 农 生 鲜</h1></div>
 <div class="content">
 <% ProductDao pd=new ProductDao(); 
@@ -38,6 +38,7 @@ ArrayList<ProductModel> productList=(ArrayList<ProductModel>)session.getAttribut
 for(ProductModel product:productList){
 %>
 <div class="product">
+<a href="#"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a>
 <p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>
 <p><%= product.getProductdate() %></p>
