@@ -44,6 +44,7 @@ for(ProductModel product:productList){
 <p><%= product.getProductintroduction() %></p>
 <p><%= product.getSupplierid() %></p>
 </div>
+
 <%
 }
 %>
