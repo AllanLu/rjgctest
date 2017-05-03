@@ -25,12 +25,12 @@ public class ConfirmOrderController extends HttpServlet {
 		//获取用户信息
 		UserService userservice=new UserService();
 		HttpSession session = request.getSession();
-		UserModel user =userservice.getUserFromSession(session);
+		//UserModel user =userservice.getUserFromSession(session);
 		
 		//调用ProductInfoService的saveHistory(List<ProductModel> list)方法，将商品加入历史记录表
 		ProductInfoService productinfoservice=new ProductInfoService();
 		List<ProductModel> list = (List<ProductModel>)session.getAttribute("list");
-		productinfoservice.saveHistory(list);
+		//productinfoservice.saveHistory(list);
 		
 		//将参数送到confirmOrder.jsp显示
 		response.sendRedirect("confirmOrder.jsp");
