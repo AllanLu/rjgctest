@@ -16,6 +16,7 @@
 <% UserModel user = (UserModel)request.getSession().getAttribute("user");
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");%>
 <div class="product">
+<img border="0" src="<%= product.getImagepath() %>" height=200px width=250px/>
 <p><%= product.getProductid() %></p>
 <p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>

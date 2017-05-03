@@ -36,8 +36,7 @@
 %>
 </div>
 <div class="title">
-<a href="#"><img border="0" src="../images/1.png" height=150px width=150px/></a>
-<h1>计 1 4 1 支 农 生 鲜</h1></div>
+<img border="0" src="../images/foryou.png" height=250px width=250px/></div>
 <div class="content">
 <% ProductDao pd=new ProductDao(); 
 ArrayList<ProductModel> productList=pd.Getall();
@@ -45,13 +44,13 @@ ArrayList<ProductModel> productList=pd.Getall();
 for(ProductModel product:productList){
 %>
 <div class="product">
-<a href="<%=request.getContextPath()%>/productInfoController.do?productid=<%=product.getProductid() %>"><img border="0" src="../images/<%= product.getImagepath() %>" height=150px width=150px/></a>
-<p><%= product.getProductname() %></p>
-<p><%= product.getProductorigin() %></p>
-<p><%= product.getProductdate() %></p>
-<p><%= product.getProductprice() %></p>
-<p><%= product.getProductintroduction() %></p>
-<p><%= product.getSupplierid() %></p>
+<div class="pic"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=<%=product.getProductid() %>"><img border="0" src="<%= product.getImagepath() %>" height=180px width=200px/></a></div>
+<div class="detail"><p>商品名称：<%= product.getProductname() %></p>
+<p>来源：<%= product.getProductorigin() %></p>
+<p>生产日期：<%= product.getProductdate() %></p>
+<p>介绍：<%= product.getProductintroduction() %></p>
+<p>价格：<%= product.getProductprice() %></p>
+<p>供应商：<%= product.getSupplierid() %></p></div>
 </div>
 <%
 }
