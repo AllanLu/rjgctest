@@ -23,28 +23,28 @@
 	if(request.getSession().getAttribute("supplier") != null) {
 		SupplierModel supplier = (SupplierModel)request.getSession().getAttribute("supplier");
 		out.print("<div class='useronline'>你好！  "+supplier.getSuppliername()+"</div>");
-		out.print("<a href='supplierModify.jsp'>商家信息修改</a></div>");
+		out.print("<div class='supplier'><a href='supplierModify.jsp'>商家信息修改</a>");
 		out.print("<a href='supplierAddProduct.jsp'>上传新商品</a></div>");
 		out.print("<div class='exit'><a href='../supplierLogin.jsp'>退出</a></div>");
 	} 
 %>
 </div>
 <div class="title">
-<a href="#"><img border="0" src="../../images/1.png" height=150px width=150px/></a>
-<h1>计 1 4 1 支 农 生 鲜</h1></div>
+<img border="0" src="../../images/foryou.png" height=250px width=250px/>
+</div>
 <div class="content">
 <% ProductDao pd=new ProductDao(); 
 ArrayList<ProductModel> productList=(ArrayList<ProductModel>)session.getAttribute("productList");
 for(ProductModel product:productList){
 %>
 <div class="product">
-<a href="<%=request.getContextPath()%>/ProductModifyController.do?productid=<%=product.getProductid() %>"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a>
-<p><%= product.getProductname() %></p>
+<div class"pic"><a href="<%=request.getContextPath()%>/ProductModifyController.do?productid=<%=product.getProductid() %>"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a></div>
+<div class="detail"><p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>
 <p><%= product.getProductdate() %></p>
 <p><%= product.getProductprice() %></p>
 <p><%= product.getProductintroduction() %></p>
-<p><%= product.getSupplierid() %></p>
+<p><%= product.getSupplierid() %></p></div>
 </div>
 
 <%
