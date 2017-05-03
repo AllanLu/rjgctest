@@ -66,3 +66,9 @@ body{
 }
 .sign input[type=submit]:hover{background-color:#ff8000;
 color:white;}
+.wrong{
+	position:absolute;
+	left:25%;
+	top:0%;
+	color:#ff0000;
+}
