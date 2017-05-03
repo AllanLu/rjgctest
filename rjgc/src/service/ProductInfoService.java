@@ -24,7 +24,7 @@ public class ProductInfoService {
 		int storedid=Integer.parseInt(pModel.getStoredid());
 		int stockNum=pModel.getStocknum();
 		int sid=Integer.parseInt(pModel.getSupplierid());
-		String image=pModel.getImage();
+		String image=pModel.getImagepath();
 		String sql="insert into product(Productname,Productorigin,Productdate,Productlife,Productintrodution,Productprice,Supplierid,Stocknum,Storedid,imagepath)"
 				+ "values(?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps;

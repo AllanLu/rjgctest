@@ -37,6 +37,7 @@ public class ProductDao {
 				productinfo.setSupplierid(rs.getString("Supplierid"));
 				productinfo.setStocknum(rs.getInt("Stocknum"));
 				productinfo.setStoredid(rs.getString("Storedid"));
+				productinfo.setImagepath(rs.getString("Imagepath"));
 				if (productid==0) System.out.println("error22");else System.out.println("ok22");
 				rs.close();
 				pstmt.close();
@@ -75,6 +76,7 @@ public class ProductDao {
 				product.setSupplierid(rs.getString("Supplierid"));
 				product.setStocknum(rs.getInt("Stocknum"));
 				product.setStoredid(rs.getString("Storedid"));
+				product.setImagepath(rs.getString("Imagepath"));
 				productList.add(product);
 			}
 			if(!productList.isEmpty()){
@@ -114,6 +116,7 @@ public class ProductDao {
 				product.setProductprice(rs.getFloat("Productprice"));
 				product.setSupplierid(rs.getString("Supplierid"));
 				product.setStocknum(rs.getInt("Stocknum"));
+				product.setImagepath(rs.getString("Imagepath"));
 				productList.add(product);
 			}
 			if(!productList.isEmpty()){

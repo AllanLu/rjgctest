@@ -13,12 +13,12 @@ public class ProductModel {
 	private String Supplierid;
 	private int Stocknum ;
 	private String Storedid ;
-	private String Image;
-	public String getImage() {
-		return Image;
+	private String Imagepath;
+	public String getImagepath() {
+		return Imagepath;
 	}
-	public void setImage(String image) {
-		Image = image;
+	public void setImagepath(String imagepath) {
+		Imagepath = imagepath;
 	}
 	public int getProductid() {
 		return Productid;
