@@ -4,7 +4,8 @@
 <%
     String path = request.getContextPath();
 	%>
-
+<%@ page import="model.*" %>
+<%@ page import="dao.*" %>
 <html>
 <head>
 <title>发布商品</title>
@@ -32,6 +33,19 @@
 <!-- lined-icons -->
 <link rel="stylesheet" href="../css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+<%
+ProductModel pModel=(ProductModel)session.getAttribute("product");
+
+String pname=pModel.getProductname();
+String porigin=pModel.getProductorigin();
+String pdate=pModel.getProductdate();
+String plife=pModel.getProductlife();
+float pprice=pModel.getProductprice();
+int pstock=pModel.getStocknum();
+String pintro=pModel.getProductintroduction();
+String pstore=pModel.getStoredid();
+String pimg=pModel.getImagepath();
+						%>
 </head>
 <body>
 	<div class="page-container">
@@ -60,56 +74,56 @@
 
 													<td class="table-text">
 														<h6>商品名称</h6> <input type="text" class="form-control"
-														name="productName">
+														name="productName" value=<%=pname%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>产地</h6> <input type="text" class="form-control"
-														name="origin">
+														name="origin" value=<%=porigin%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>生产日期</h6> <input type="text" class="form-control"
-														name="date">
+														name="date" value=<%=pdate%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>保质期</h6> <input type="text" class="form-control"
-														name="life">
+														name="life" value=<%=plife%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>价格</h6> <input type="number" class="form-control"
-														name="price">
+														name="price" value=<%=pprice%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>库存</h6> <input type="number" class="form-control"
-														name="stockNum">
+														name="stockNum" value=<%=pstock%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>简介</h6> <input type="text" class="form-control"
-														name="introduction">
+														name="introduction" value=<%=pintro%>>
 													</td>
 												</tr>
 												<tr class="table-row">
 
 													<td class="table-text">
 														<h6>仓库编号</h6> <input type="text" class="form-control"
-														name="storedid">
+														name="storedid" value=<%=pstore%>>
 													</td>
 												</tr>
 

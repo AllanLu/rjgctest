@@ -84,7 +84,7 @@
 					}
 				</script>
 				<div class="back">
-					<a href="">前往登陆页面</a>
+					<a href="../supplierLogin.jsp">前往登陆页面</a>
 				</div>
 				<div class="footer">
 					<p>&copy; 2016 Pooled . All Rights Reserved</p>

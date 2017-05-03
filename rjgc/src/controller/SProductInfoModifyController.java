@@ -24,7 +24,13 @@ public class SProductInfoModifyController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		ProductModel product = new ProductModel();
-		int productid = (int)request.getAttribute("productid");
+		int productid = 0;
+		try{
+			productid=Integer.parseInt(request.getParameter("productid"));
+			}
+		catch (NumberFormatException e) {
+		    e.printStackTrace();
+		}
 		ProductDao pd = new ProductDao();
 		try{
 			product = pd.getProductByProductid(productid);
@@ -44,7 +50,7 @@ public class SProductInfoModifyController extends HttpServlet {
 			else{
 				HttpSession session = request.getSession();
 				session.setAttribute("product", product);
-				RequestDispatcher rd = request.getRequestDispatcher("/jsp/SupplierJsp/supplierAddProduct.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/jsp/SupplierJsp/supplierChangeProduct.jsp");
 				rd.forward(request,response);
 				
 			
@@ -85,7 +91,7 @@ public class SProductInfoModifyController extends HttpServlet {
 			else{
 				HttpSession session = request.getSession();
 				session.setAttribute("product", product);
-				RequestDispatcher rd = request.getRequestDispatcher("/jsp/SupplierJsp/supplierAddProduct.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/jsp/SupplierJsp/supplierChangeProduct.jsp");
 				rd.forward(request,response);
 				
 			
