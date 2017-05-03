@@ -59,7 +59,13 @@ public class SProductInfoModifyController extends HttpServlet {
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		ProductModel product = new ProductModel();
-		int productid = (int)request.getAttribute("productid");
+		int productid = 0;
+		try{
+			productid=Integer.parseInt(request.getParameter("productid"));
+			}
+		catch (NumberFormatException e) {
+		    e.printStackTrace();
+		}
 		ProductDao pd = new ProductDao();
 		try{
 			product = pd.getProductByProductid(productid);
