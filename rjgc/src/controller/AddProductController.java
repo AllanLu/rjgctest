@@ -73,7 +73,7 @@ public class AddProductController extends HttpServlet {
 			pModel.setProductorigin(origin);
 			pModel.setProductprice(Float.parseFloat(price));
 			pModel.setSupplierid(""+sid);
-			pModel.setImage(path);
+			pModel.setImagepath(path);
 			pModel.setProductlife(life);
 			pModel.setStocknum(Integer.parseInt(stockNum));
 			pModel.setStoredid(storedid);

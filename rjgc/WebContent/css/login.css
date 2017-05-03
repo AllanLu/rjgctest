@@ -20,7 +20,7 @@ body{
     background: transparent;
     border: 1px solid #32cf42;
     border-radius: 2px;
-    color: #fff;
+    color: #32cf42;
     font-family: 'Exo', sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -35,7 +35,7 @@ body{
     background: transparent;
     border: 1px solid #32cf42;
     border-radius: 2px;
-    color: #fff;
+    color: #32cf42;
     font-family: 'Exo', sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -66,3 +66,9 @@ body{
 }
 .sign input[type=submit]:hover{background-color:#ff8000;
 color:white;}
+.wrong{
+	position:absolute;
+	left:25%;
+	top:0%;
+	color:#ff0000;
+}

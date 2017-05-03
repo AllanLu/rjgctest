@@ -37,6 +37,11 @@ public class ProductDao {
 				productinfo.setSupplierid(rs.getString("Supplierid"));
 				productinfo.setStocknum(rs.getInt("Stocknum"));
 				productinfo.setStoredid(rs.getString("Storedid"));
+<<<<<<< HEAD
+=======
+				productinfo.setImagepath(rs.getString("Imagepath"));
+				if (productid==0) System.out.println("error22");else System.out.println("ok22");
+>>>>>>> branch 'master' of https://github.com/AllanLu/rjgctest.git
 				rs.close();
 				pstmt.close();
 				conn.close();
@@ -73,6 +78,7 @@ public class ProductDao {
 				product.setSupplierid(rs.getString("Supplierid"));
 				product.setStocknum(rs.getInt("Stocknum"));
 				product.setStoredid(rs.getString("Storedid"));
+				product.setImagepath(rs.getString("Imagepath"));
 				productList.add(product);
 			}
 			if(!productList.isEmpty()){
@@ -112,6 +118,7 @@ public class ProductDao {
 				product.setProductprice(rs.getFloat("Productprice"));
 				product.setSupplierid(rs.getString("Supplierid"));
 				product.setStocknum(rs.getInt("Stocknum"));
+				product.setImagepath(rs.getString("Imagepath"));
 				productList.add(product);
 			}
 			if(!productList.isEmpty()){

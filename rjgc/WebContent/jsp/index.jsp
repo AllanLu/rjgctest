@@ -45,6 +45,7 @@ ArrayList<ProductModel> productList=pd.Getall();
 for(ProductModel product:productList){
 %>
 <div class="product">
+<a href="#"><img border="0" src="<%= product.getImagepath() %>" height=150px width=150px/></a>
 <p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>
 <p><%= product.getProductdate() %></p>
