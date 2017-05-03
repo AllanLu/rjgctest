@@ -13,6 +13,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import model.ProductModel;
+import model.ShoppingcartModel;
+import model.UserModel;
 
 public class ProductDao {
 	String sql="";
@@ -132,4 +134,23 @@ public class ProductDao {
 		}
 		return null;	
 		}
+	
+	public void insertnewshoppingcart(ShoppingcartModel newshoppingcart) throws SQLException{
+		conn=GetConnection.getConnection();
+		String sql="insert into Shoppingcart(Productid,Productnum,Productprice,Buyername,Shoppingcartid) values(?,?,?,?,?)";
+		try{
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1,newshoppingcart.getProductid());
+			pstmt.setInt(2,newshoppingcart.getProductnum());
+			pstmt.setFloat(3,newshoppingcart.getProductprice());
+			pstmt.setString(4,newshoppingcart.getBuyername());
+			pstmt.setInt(5, newshoppingcart.getShoppingcartid());
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

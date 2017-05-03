@@ -24,6 +24,19 @@ ProductModel product =(ProductModel)request.getSession().getAttribute("product")
 <p><%= product.getProductintroduction() %></p>
 <p><%= product.getSupplierid() %></p>
 </div>
+<form action="../shoppingCartController.do"method=post>
+<% 
+product.setProductid(1);
+session.setAttribute("user", user);
+session.setAttribute("product", product);
+//response.sendRedirect("productInfo.jsp");
+//RequestDispatcher rd = request.getRequestDispatcher("/productInfoController.do");
+//rd.forward(request,response);
+%>
+<tr><div>数量<input type="text" name="Productnum" id="Productnum"></div><br>
+<td><input type="submit" value="加入购物车"/></td>
+</tr>
+</form>
 <!--该jsp页面主要实现展示商品信息，其中有加入购物车按钮和购买按钮-->
 <!--该页面接收ProductInfoController类传来的ProductModel对象并显示-->
 <!--点击加入购物车时将ProductModel对象提交到/addSCartController.do，并令flag=productInfo-->

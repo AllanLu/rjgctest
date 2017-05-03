@@ -6,7 +6,15 @@ public class ShoppingcartModel {
     private int Productnum;
     private float Productprice;
     private String Buyername;
-    public int getBuyerid() {
+    private int Shoppingcartid;
+    public int getShoppingcartid() {
+		return Shoppingcartid;
+	}
+	public void setShoppingcartid(int shoppingcartid) {
+		Shoppingcartid = shoppingcartid;
+	}
+	public int getBuyerid() {
+    
 		return Buyerid;
 	}
 	public void setBuyerid(int buyerid) {
