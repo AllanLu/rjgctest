@@ -38,7 +38,7 @@ ArrayList<ProductModel> productList=(ArrayList<ProductModel>)session.getAttribut
 for(ProductModel product:productList){
 %>
 <div class="product">
-<a href="#"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a>
+<a href="<%=request.getContextPath()%>/ProductModifyController.do?productid=<%=product.getProductid() %>"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a>
 <p><%= product.getProductname() %></p>
 <p><%= product.getProductorigin() %></p>
 <p><%= product.getProductdate() %></p>
