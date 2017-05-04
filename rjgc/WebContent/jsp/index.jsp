@@ -37,6 +37,10 @@
 </div>
 <div class="title">
 <img border="0" src="../images/foryou.png" height=250px width=250px/></div>
+<form id="search" action="../productInfoController.do" method="post">
+	<input type="text" name="keyword" placeholder="搜索商品">
+	<button type="submit">搜索</button>
+</form>
 <div class="content">
 <% ProductDao pd=new ProductDao(); 
 ArrayList<ProductModel> productList=pd.Getall();
