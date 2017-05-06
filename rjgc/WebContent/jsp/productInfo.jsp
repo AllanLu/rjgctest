@@ -55,9 +55,6 @@ ProductModel product =(ProductModel)request.getSession().getAttribute("product")
 product.setProductid(1);
 session.setAttribute("user", user);
 session.setAttribute("product", product);
-//response.sendRedirect("productInfo.jsp");
-//RequestDispatcher rd = request.getRequestDispatcher("/productInfoController.do");
-//rd.forward(request,response);
 %>
 <tr><div>数量:  <input type="text" name="Productnum" id="Productnum" size=4></div><br>
 <td><input type="submit" value="加入购物车"/></td>

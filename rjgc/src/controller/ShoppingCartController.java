@@ -31,8 +31,8 @@ public class ShoppingCartController extends HttpServlet {
 		ProductInfoService productservice=new ProductInfoService();
 		shop=productservice.getProductList(user.getName());
 		session.setAttribute("shop", shop);
-		String path=request.getContextPath(); 
-		response.sendRedirect(path+"/jsp/shoppingcart.jsp");
+		//String path=request.getContextPath(); 
+		response.sendRedirect("jsp/UserJsp/shoppingCart.jsp");
 		//购物车控制器，调用ProductInfoService类的getProductList()方法获取session中的ProductModel对象列表
 		//传递ProductModel对象列表并跳转到shoppingCart.jsp显示给用户
 	}
