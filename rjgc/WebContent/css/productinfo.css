@@ -1,5 +1,6 @@
 .product {
-    margin: auto;
+	position:relative;
+	margin-top:50px;
     left: 12%;
     width: 70%;
     height: 90%;
