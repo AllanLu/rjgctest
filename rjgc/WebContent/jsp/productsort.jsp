@@ -21,17 +21,17 @@
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		out.print("<div class='useronline'>你好！  "+user.getName()+"</div>");
 		out.print("<div class='supplier'><a href='UserJsp/userInfo.jsp'>个人中心</a>");
-		out.print("<a href='UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
-		out.print("<a href='supplierLogin.jsp'>商家登录</a>");
-		out.print("<a href='supplierLogin.jsp'>商家中心</a></div>");
-		out.print("<div class='exit'><a href='login.jsp'>退出</a></div>");
+		out.print("<a href='rjgc/../jsp/UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
+		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家登录</a>");
+		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家中心</a></div>");
+		out.print("<div class='exit'><a href='rjgc/../jsp/login.jsp'>退出</a></div>");
 	} else {
-		out.print("<div class='user'><ul><li><a href='login.jsp'>用户登录</a></li></div>");
-		out.print("<div class='supplier'><a href='login.jsp'>个人中心</a>");
-		out.print("<a href='login.jsp'>购物车</a><p>丨</p>");
-		out.print("<a href='supplierLogin.jsp'>商家登录</a>");
-		out.print("<a href='supplierLogin.jsp'>商家中心</a></div>");
-		out.print("<div class='exit'><a href='login.jsp'>退出</a></div>");
+		out.print("<div class='user'><ul><li><a href='rjgc/../jsp/login.jsp'>用户登录</a></li></div>");
+		out.print("<div class='supplier'><a href='rjgc/../jsp/login.jsp'>个人中心</a>");
+		out.print("<a href='rjgc/../jsp/login.jsp'>购物车</a><p>丨</p>");
+		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家登录</a>");
+		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家中心</a></div>");
+		out.print("<div class='exit'><a href='rjgc/../jsp/login.jsp'>退出</a></div>");
 	}
 %>
 </div>
