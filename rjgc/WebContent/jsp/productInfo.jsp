@@ -53,7 +53,7 @@ ProductModel product =(ProductModel)request.getSession().getAttribute("product")
 <p>库存量: <%= product.getStocknum() %></p>
 
 
-<form action="<%=request.getContextPath()%>/addSCartController.do"method=post>
+<form action="<%=path%>/addSCartController.do"method=post>
 <% 
 product.setProductid(1);
 session.setAttribute("user", user);

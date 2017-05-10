@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -57,9 +58,12 @@ public class AddSCartController extends HttpServlet {
 		shopcart.setProductprice(price);
 		//shop.setShoppingcartid(shoppingcartid);//添加购物车id需要特殊方法
 		ProductDao productdao=new ProductDao();
+		PrintWriter out=response.getWriter();
+		out.println("<html><body>");
 		try {
 			productdao.insertnewshoppingcart(shopcart);
-			response.sendRedirect("jsp/productinfo.jsp");
+			out.println("添加成功！");
+			//response.sendRedirect("jsp/productinfo.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
