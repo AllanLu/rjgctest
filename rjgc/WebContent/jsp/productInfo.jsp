@@ -64,6 +64,9 @@ session.setAttribute("product", product);
 </tr>
 </form>
 </div>
+<form action="<%=path%>/confirmOrderController.do"method=post>
+<td><input type="submit" value="立即购买"/></td>
+</form>
 <!--该jsp页面主要实现展示商品信息，其中有加入购物车按钮和购买按钮-->
 <!--该页面接收ProductInfoController类传来的ProductModel对象并显示-->
 <!--点击加入购物车时将ProductModel对象提交到/addSCartController.do，并令flag=productInfo-->
