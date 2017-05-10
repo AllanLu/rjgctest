@@ -10,6 +10,10 @@
 <head>
 <title>首页</title>
 <link rel="stylesheet" href="../css/index.css">
+<link type="text/css" rel="stylesheet" href="../css/carousel.css">
+	<style type="text/css">
+		.caroursel{margin:150px auto;}
+	</style>
 </head>
 
 <body>
@@ -52,6 +56,37 @@
 <li><a href="<%=request.getContextPath() %>/Productsort.do?productsort=水产">水产</a></li>
 </ul>
 </div>
+<div class="lunbotu">
+<div class = "caroursel poster-main" data-setting = '{
+	        "width":1170,
+	        "height":270,
+	        "posterWidth":800,
+	        "posterHeight":300,
+	        "scale":0.8,
+	        "dealy":"2000",
+	        "algin":"middle"
+	    }'>
+	        <ul class = "poster-list">
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=1"><img src="../images/a1.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=2"><img src="../images/a2.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=3"><img src="../images/a3.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=4"><img src="../images/a4.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=5"><img src="../images/a5.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=6"><img src="../images/a6.jpg" width = 700 height=300></li></a>
+	            <li class = "poster-item"><a href="<%=request.getContextPath()%>/productInfoController.do?productid=1"><img src="../images/a1.jpg" width = 700 height=300></li></a>
+	        </ul>
+	        
+            
+	        <div class = "poster-btn poster-prev-btn"></div>
+	        <div class = "poster-btn poster-next-btn"></div>
+
+	    </div>	
+	<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../js/jquery.carousel.js"></script>
+    <script>
+        Caroursel.init($('.caroursel'))
+    </script>
+    </div>
 <div class="content">
 <% ProductDao pd=new ProductDao(); 
 ArrayList<ProductModel> productList=pd.Getall();

@@ -65,6 +65,24 @@ public class UserDao {
 		}
 		return i;
 	}
+	public void changeinfo(UserModel user) throws SQLException{
+		conn=GetConnection.getConnection();
+		String sql="UPDATE Buyer set Buyename=?,Buyertel=?,Buyeraddress=?,BuyerPassword=?,BuyerRealname=? where Buyerid=?";
+		try{
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,user.getName());
+			pstmt.setString(2,user.getTel());
+			pstmt.setString(3,user.getAddress());
+			pstmt.setString(4,user.getPassword());		
+			pstmt.setString(5, user.getRealName());
+			pstmt.setInt(6,user.getId());
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	public void insertnewuser(UserModel newuser) throws SQLException{
 		conn=GetConnection.getConnection();
@@ -94,7 +112,7 @@ public class UserDao {
 			ResultSet rs=stmt.executeQuery(sql);
 			if (rs.next()) {
 				UserModel user = new UserModel();
-				//user.setId(rs.getInt("Buyerid"));
+				user.setId(rs.getInt("Buyerid"));
 				user.setName(rs.getString("Buyername"));
 				user.setTel(rs.getString("Buyertel"));
 				user.setAddress(rs.getString("Buyeraddress"));
