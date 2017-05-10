@@ -16,12 +16,12 @@ import model.ShoppingcartModel;
 import model.UserModel;
 import service.ProductInfoService;
 import dao.ProductDao;
-@WebServlet(urlPatterns = {"/addSCartController.do"})
+@WebServlet(name="addscartcontrol",urlPatterns = {"/addSCartController.do"})
 public class AddSCartController extends HttpServlet {
-	public  AddSCartController()
-	{
-		super();
-	}
+	//public  AddSCartController()
+	//{
+	//	super();
+	//}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
@@ -50,15 +50,15 @@ public class AddSCartController extends HttpServlet {
 		//int sid=(int)session.getAttribute("Supplierid");
 		//判断是否登录，若登录了，则带ProductModel返回productInfo.jsp页面
 		//boolean islogin=(boolean)session.getAttribute("islogin");
-		ShoppingcartModel shop=new ShoppingcartModel();
-		shop.setBuyername(username);
-		shop.setProductid(Productid);
-		shop.setProductnum(productnum);
-		shop.setProductprice(price);
+		ShoppingcartModel shopcart=new ShoppingcartModel();
+		shopcart.setBuyername(username);
+		shopcart.setProductid(Productid);
+		shopcart.setProductnum(productnum);
+		shopcart.setProductprice(price);
 		//shop.setShoppingcartid(shoppingcartid);//添加购物车id需要特殊方法
 		ProductDao productdao=new ProductDao();
 		try {
-			productdao.insertnewshoppingcart(shop);
+			productdao.insertnewshoppingcart(shopcart);
 			response.sendRedirect("jsp/productinfo.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -5,6 +5,9 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.util.*" %>
 <%@ page import="dao.ProductDao" %>
+<%
+    String path = request.getContextPath();
+	%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,7 +53,7 @@ ProductModel product =(ProductModel)request.getSession().getAttribute("product")
 <p>库存量: <%= product.getStocknum() %></p>
 
 
-<form action="../shoppingCartController.do"method=post>
+<form action="<%=request.getContextPath()%>/addSCartController.do"method=post>
 <% 
 product.setProductid(1);
 session.setAttribute("user", user);
