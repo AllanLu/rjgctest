@@ -14,6 +14,13 @@ public class ProductModel {
 	private int Stocknum ;
 	private String Storedid ;
 	private String Imagepath;
+	private String Productsort;
+	public String getProductsort(){
+		return Productsort;
+	}
+	public void setProductsort(String productsort){
+		Productsort=productsort;
+	}
 	public String getImagepath() {
 		return Imagepath;
 	}
