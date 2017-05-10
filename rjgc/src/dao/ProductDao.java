@@ -180,7 +180,8 @@ public class ProductDao {
 			pstmt.setInt(2,newshoppingcart.getProductnum());
 			pstmt.setFloat(3,newshoppingcart.getProductprice());
 			pstmt.setString(4,newshoppingcart.getBuyername());
-			pstmt.setInt(5, newshoppingcart.getShoppingcartid());
+			pstmt.setInt(5,newshoppingcart.getProductid()+15);
+			//pstmt.setInt(5, newshoppingcart.getShoppingcartid());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();

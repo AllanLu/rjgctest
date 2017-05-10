@@ -13,51 +13,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <style type="text/css">
-#textarea {
-	position: absolute;
-	width: 356px;
-	height: 22px;
-	left: 667px;
-	top: 235px;
-}
-#button {
-	position: absolute;
-	left: 1029px;
-	top: 233px;
-	width: 57px;
-	height: 26px;
-	background-color: #D6D6D6;
-}
-#nav {
-	line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;
-}
-#form1 {
-	position: absolute;
-	left: 967px;
-	top: 576px;
-	height: 46px;
-	background-color: #FFFFFF;
-	width: 464px;
-	visibility: inherit;
-}
-body,td,th {
-	color: #630;
-	font-family: monospace;
-	font-weight: bold;
-}
-.首页 {
-	position: absolute;
-	background-color: #CCCCCC;
-	width: 79px;
-	height: 27px;
-	top: 632px;
-	left: 777px;
-}
+
+
 </style>
 </head>
 
@@ -68,11 +25,11 @@ body,td,th {
 	if(request.getSession().getAttribute("user") != null) {
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		out.print("<div class='useronline'>你好！  "+user.getName()+"</div>");
-		out.print("<div class='supplier'><a href='UserJsp/userInfo.jsp'>个人中心</a>");
-		out.print("<a href='UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
-		out.print("<a href='supplierLogin.jsp'>商家登录</a>");
-		out.print("<a href='supplierLogin.jsp'>商家中心</a></div>");
-		out.print("<div class='exit'><a href='login.jsp'>退出</a></div>");
+		out.print("<div class='supplier'><a href='../UserJsp/userInfo.jsp'>个人中心</a>");
+		out.print("<a href='../UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
+		out.print("<a href='../supplierLogin.jsp'>商家登录</a>");
+		out.print("<a href='../supplierLogin.jsp'>商家中心</a></div>");
+		out.print("<div class='exit'><a href='../login.jsp'>退出</a></div>");
 	} else {
 		out.print("<div class='user'><ul><li><a href='login.jsp'>用户登录</a></li></div>");
 		out.print("<div class='supplier'><a href='login.jsp'>个人中心</a>");
@@ -94,13 +51,7 @@ body,td,th {
 <p><strong> 全部商品
 </strong></p>
 <hr />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="2.png" width="313" height="290" /></p>
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>您的购物车还是空的，赶紧购物吧~
-  </strong> &nbsp;&nbsp;&nbsp;
-  <input name="button3" type="submit" class="首页" id="button3" value="返回首页" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-  <p>&nbsp;</p>
+  
   <% UserModel user = (UserModel)request.getSession().getAttribute("user");
  //ArrayList<ShoppingcartModel> shoplist=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
