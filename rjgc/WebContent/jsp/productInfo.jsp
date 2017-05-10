@@ -5,6 +5,8 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.util.*" %>
 <%@ page import="dao.ProductDao" %>
+<%@ page import="dao.SupplierDao" %>
+<%@ page import="model.SupplierModel" %>
 <%
     String path = request.getContextPath();
 	%>
@@ -39,7 +41,14 @@
 %>
 </div>
 <% UserModel user = (UserModel)request.getSession().getAttribute("user");
-ProductModel product =(ProductModel)request.getSession().getAttribute("product");%>
+ProductModel product =(ProductModel)request.getSession().getAttribute("product");
+String supplierid0=product.getSupplierid();
+int supplierid =Integer.parseInt(supplierid0);
+SupplierModel supplier=new SupplierModel();
+SupplierDao supplierdao=new SupplierDao();
+supplier.setSupplierid(supplierid);
+supplier = supplierdao.getSupplierbyid(supplier);
+%>
 <div class="product">
 <div class="left">
 <div class="image"><img class="border="0"  src="rjgc/<%= product.getImagepath() %>" width=250px/></div>
@@ -51,8 +60,6 @@ ProductModel product =(ProductModel)request.getSession().getAttribute("product")
 <p>生产日期: <%= product.getProductdate() %></p>
 <p>过期日期: <%= product.getProductlife() %></p>
 <p>库存量: <%= product.getStocknum() %></p>
-
-
 <form action="<%=path%>/addSCartController.do"method=post>
 <% 
 product.setProductid(1);
@@ -64,6 +71,10 @@ session.setAttribute("product", product);
 </tr>
 </form>
 </div>
+<p><%= supplier.getSuppliername() %></p>
+<p><%= supplier.getSupplieraddress() %></p>
+<p><%= supplier.getSupplierintroduction() %></p>
+<p><%= supplier.getSuppliertel() %></p>
 <form action="<%=path%>/confirmOrderController.do"method=post>
 <td><input type="submit" value="立即购买"/></td>
 </form>
