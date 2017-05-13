@@ -25,7 +25,7 @@
 		out.print("<div class='useronline'>你好！  "+supplier.getSuppliername()+"</div>");
 		out.print("<div class='supplier'><a href='supplierModify.jsp'>商家信息修改</a>");
 		out.print("<a href='supplierAddProduct.jsp'>上传新商品</a></div>");
-		out.print("<div class='exit'><a href='../supplierLogin.jsp'>退出</a></div>");
+		out.print("<div class='exit'><a href='../index.jsp'>退出</a></div>");
 	} 
 %>
 </div>
