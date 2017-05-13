@@ -22,7 +22,7 @@
         	<input type="text" placeholder="用户名" name="Suppliername" id="Suppliername"><br>
         	<input type="password" placeholder="密码" name="SupplierPassword" id="SupplierPassword"><br>
         	<input type="submit" value="登录">
-        	<a href="../SupplierJsp/supplierRegist.jsp">注册</a>
+        	<a href="SupplierJsp/supplierRegister.jsp">注册</a>
         </div>
     </form>
 </div>
