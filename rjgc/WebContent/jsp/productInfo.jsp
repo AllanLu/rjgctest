@@ -14,8 +14,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/productinfo.css">
+<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+<link href="https://fonts.lug.ustc.edu.cn/css?family=Roboto:300,400,500" rel="stylesheet">
 <title>商品信息</title>
 </head>
 
@@ -49,43 +50,86 @@ SupplierDao supplierdao=new SupplierDao();
 supplier.setSupplierid(supplierid);
 supplier = supplierdao.getSupplierbyid(supplier);
 %>
-<div class="product">
-<div class="left">
-<div class="image"><img class="border="0"  src="rjgc/<%= product.getImagepath() %>" width=250px/></div>
-</div>
-<div class="info">
-<p>商品名称: <%= product.getProductname() %></p>
-<p>商品源: <%= product.getProductorigin() %></p>
-<p>价格: <%= product.getProductprice() %></p>
-<p>生产日期: <%= product.getProductdate() %></p>
-<p>过期日期: <%= product.getProductlife() %></p>
-<p>库存量: <%= product.getStocknum() %></p>
-<form action="<%=path%>/addSCartController.do"method=post>
-<% 
-product.setProductid(1);
-session.setAttribute("user", user);
-session.setAttribute("product", product);
-%>
-<tr><div>数量:  <input type="text" name="Productnum" id="Productnum" size=4></div><br>
-<td><input type="submit" value="加入购物车"/></td>
-</tr>
-</form>
-</div>
-<p><%= supplier.getSuppliername() %></p>
-<p><%= supplier.getSupplieraddress() %></p>
-<p><%= supplier.getSupplierintroduction() %></p>
-<p><%= supplier.getSuppliertel() %></p>
-<form action="<%=path%>/confirmOrderController.do"method=post>
+
+<main class="container">
+ 
+  <div class="left-column">
+    <img data-image="red" class="active" src="rjgc/<%= product.getImagepath() %>" alt="">
+  </div>
+ 
+ 
+  <div class="right-column">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+      <span></span>
+      <h1><%= product.getProductname() %></h1>
+<p><strong>单价: </strong><%= product.getProductprice() %></p>
+<p><strong>商品源: </strong><%= product.getProductorigin() %></p>
+<p><strong>生产日期: </strong><%= product.getProductdate() %></p>
+<p><strong>过期日期: </strong><%= product.getProductlife() %></p>
+<p><strong>库存量: </strong><%= product.getStocknum() %></p>
+<p><strong>商家名称: </strong><%= supplier.getSuppliername() %></p>
+<p><strong>商家地址: </strong><%= supplier.getSupplieraddress() %></p>
+<p><strong>商家介绍: </strong><%= supplier.getSupplierintroduction() %></p>
+<p><strong>商家电话：</strong><%= supplier.getSuppliertel() %></p>
+    </div>
+    <!-- Product Pricing -->
+	<div class="quantity">
+        <button class="plus-btn" type="button" name="button">
+            <img src="rjgc/../images/plus.svg" alt="">
+        </button>
+        <input type="text" name="name" value="1">
+        <button class="minus-btn" type="button" name="button">
+            <img src="rjgc/../images/minus.svg" alt="">
+        </button>
+        </div>
+    <div class="product-price">
+      <span>￥<%= product.getProductprice() %></span>
+      <form action="<%=path%>/confirmOrderController.do"method=post>
 <td><input type="submit" value="立即购买"/></td>
 </form>
-<!--该jsp页面主要实现展示商品信息，其中有加入购物车按钮和购买按钮-->
-<!--该页面接收ProductInfoController类传来的ProductModel对象并显示-->
-<!--点击加入购物车时将ProductModel对象提交到/addSCartController.do，并令flag=productInfo-->
-
-<div class="detail">
-<hr/>
-<p style="font-size:20px">商品详情</p>
-<p><%= product.getProductintroduction() %></p></div>
+<form action="<%=path%>/addScartController.do"method=post>
+<td><input type="submit" value="加入购物车"/></td>
+</form>
+    </div>
 </div>
+</main>
+<script type="text/javascript">
+      $('.minus-btn').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		var value = parseInt($input.val());
+
+    		if (value > 1) {
+    			value = value - 1;
+    		} else {
+    			value = 0;
+    		}
+
+        $input.val(value);
+
+    	});
+
+    	$('.plus-btn').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		var value = parseInt($input.val());
+
+    		if (value < 10000) {
+      		value = value + 1;
+    		} else {
+    			value =10000;
+    		}
+
+    		$input.val(value);
+    	});
+
+      $('.like-btn').on('click', function() {
+        $(this).toggleClass('is-active');
+      });
+</script>
 </body>
 </html>
