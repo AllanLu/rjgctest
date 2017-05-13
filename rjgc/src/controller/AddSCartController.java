@@ -63,7 +63,7 @@ public class AddSCartController extends HttpServlet {
 		try {
 			productdao.insertnewshoppingcart(shopcart);
 			out.println("Ìí¼Ó³É¹¦£¡");
-			//response.sendRedirect("jsp/productinfo.jsp");
+			response.sendRedirect("jsp/user/shoppingCart.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -90,8 +90,9 @@ supplier = supplierdao.getSupplierbyid(supplier);
       
 <td><input type="submit" value="立即购买"/></td>
 </form>
-<form action="<%=path%>../addScartController.do"method=post>
+<form action="<%=path%>/addSCartController.do"method=post>
 <td><input type="submit" value="加入购物车"/></td>
+<a href="shoppingCart.jsp">我的购物车</a>
 </form>
     </div>
 </div>

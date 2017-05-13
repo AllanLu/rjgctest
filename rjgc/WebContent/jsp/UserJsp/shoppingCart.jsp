@@ -61,6 +61,7 @@
 ProductInfoService productservice=new ProductInfoService();
 shoplist=productservice.getProductList(user.getId());
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");
+if (!shoplist.isEmpty()){
 for(ShoppingcartModel shoppingcart:shoplist){
 %>
 <div class="shop">
@@ -68,7 +69,14 @@ for(ShoppingcartModel shoppingcart:shoplist){
 <p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
 </div>
 <%
-}%>
+}}else {
+	%>
+	<div class="shop">
+	<p><strong>购物车为空 快去购买 </strong></p>
+	
+	</div>
+	<%
+} %>
 
 
 </body>
