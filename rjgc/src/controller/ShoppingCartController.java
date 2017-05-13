@@ -29,7 +29,7 @@ public class ShoppingCartController extends HttpServlet {
 		user =(UserModel)session.getAttribute("user");
 		List<ShoppingcartModel> shop=new ArrayList<ShoppingcartModel>();
 		ProductInfoService productservice=new ProductInfoService();
-		shop=productservice.getProductList(user.getName());
+		shop=productservice.getProductList(user.getId());
 		session.setAttribute("shop", shop);
 		//String path=request.getContextPath(); 
 		response.sendRedirect("jsp/UserJsp/shoppingCart.jsp");

@@ -7,11 +7,14 @@
 <%@ page import="dao.ProductDao" %>
 <%@ page import="model.ShoppingcartModel" %>
 <%@page import="service.ProductInfoService" %>
+<%
+    String path = request.getContextPath();
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>我的购物车</title>
 <style type="text/css">
 
 
@@ -56,15 +59,17 @@
  //ArrayList<ShoppingcartModel> shoplist=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
 ProductInfoService productservice=new ProductInfoService();
-shoplist=productservice.getProductList(user.getName());
+shoplist=productservice.getProductList(user.getId());
 ProductModel product =(ProductModel)request.getSession().getAttribute("product");
 for(ShoppingcartModel shoppingcart:shoplist){
 %>
 <div class="shop">
-<p><%= shoppingcart.getProductnum() %></p>
-<p><%= shoppingcart.getProductprice() %></p>
+<p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
+<p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
 </div>
 <%
 }%>
+
+
 </body>
 </html>

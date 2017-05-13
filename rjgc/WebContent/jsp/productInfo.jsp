@@ -87,9 +87,10 @@ supplier = supplierdao.getSupplierbyid(supplier);
     <div class="product-price">
       <span>￥<%= product.getProductprice() %></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
+      
 <td><input type="submit" value="立即购买"/></td>
 </form>
-<form action="<%=path%>/addScartController.do"method=post>
+<form action="<%=path%>../addScartController.do"method=post>
 <td><input type="submit" value="加入购物车"/></td>
 </form>
     </div>

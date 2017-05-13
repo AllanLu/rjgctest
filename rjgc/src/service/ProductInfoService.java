@@ -73,20 +73,21 @@ public class ProductInfoService {
 		return product;
 	}
 	//根据username  查询购物车
-	public List<ShoppingcartModel> getProductList(String Username){
+	public List<ShoppingcartModel> getProductList(int Userid){
 		String sql="";
 		List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
 		try{
-			sql="select * from Shoppingcart where Buyername=?";
+			sql="select * from Shoppingcart where Buyerid=?";
 			PreparedStatement pstmt=conn0.prepareStatement(sql);
-			pstmt.setString(1, Username);
+			pstmt.setInt(1, Userid);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){
 				ShoppingcartModel shopping=new ShoppingcartModel();
 				shopping.setBuyerid(rs.getInt("Buyerid"));
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
+				shopping.setProductprice(rs.getFloat("Productprice"));
 				shoppingcartlist.add(shopping);
 			}
 			if(!shoppingcartlist.isEmpty()){
