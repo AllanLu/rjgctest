@@ -126,6 +126,7 @@ public class ProductInfoService {
 				//request.getSession().setAttribute("productList",productList);
 				//response.sendRedirect("/rjgc/jsp/index.jsp");
 			} 
+			//else {return shoppingcartList;}
 			rs.close();
 			pstmt.close();
 			conn0.close();

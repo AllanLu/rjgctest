@@ -40,7 +40,7 @@ public class AddSCartController extends HttpServlet {
 		//String introduction=request.getParameter("introduction");
 		//String storedid=request.getParameter("storedid");
 		//String stockNum=request.getParameter("stockNum");
-		int productnum=Integer.parseInt(request.getParameter("Productnum"));
+		int productnum=Integer.parseInt(request.getParameter("productnum"));
 		ProductModel product =(ProductModel)session.getAttribute("product");
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		//boolean flag=(boolean)session.getAttribute("flag");

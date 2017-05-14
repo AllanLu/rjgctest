@@ -9,6 +9,7 @@
 <%@ page import="model.SupplierModel" %>
 <%
     String path = request.getContextPath();
+	int num=1;
 	%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,6 +22,7 @@
 </head>
 
 <body>
+
 <div class="header">
 <%
 	if(request.getSession().getAttribute("user") != null) {
@@ -85,14 +87,14 @@ supplier = supplierdao.getSupplierbyid(supplier);
         </button>
         </div>
     <div class="product-price">
-      <span>￥<%= product.getProductprice() %></span>
+      <span>￥<%= product.getProductprice()*num %></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
       
 <td><input type="submit" value="立即购买"/></td>
 </form>
 <form action="<%=path%>/addSCartController.do"method=post>
+<%String productnum=Integer.toString(num); %>
 <td><input type="submit" value="加入购物车"/></td>
-<a href="shoppingCart.jsp">我的购物车</a>
 </form>
     </div>
 </div>
@@ -102,31 +104,28 @@ supplier = supplierdao.getSupplierbyid(supplier);
     		e.preventDefault();
     		var $this = $(this);
     		var $input = $this.closest('div').find('input');
-    		var value = parseInt($input.val());
-
-    		if (value > 1) {
-    			value = value - 1;
+    		 num = parseInt($input.val());
+    		if (num > 1) {
+    			num = num - 1;
     		} else {
-    			value = 0;
+    			num = 0;
     		}
-
-        $input.val(value);
-
+        $input.val(num);
+        
     	});
 
     	$('.plus-btn').on('click', function(e) {
     		e.preventDefault();
     		var $this = $(this);
     		var $input = $this.closest('div').find('input');
-    		var value = parseInt($input.val());
-
-    		if (value < 10000) {
-      		value = value + 1;
+    		num = parseInt($input.val());
+       		if (num <1000 ) {
+      		num = num + 1;
     		} else {
-    			value =10000;
+    			num =1000 ;
     		}
 
-    		$input.val(value);
+    		$input.val(num);
     	});
 
       $('.like-btn').on('click', function() {

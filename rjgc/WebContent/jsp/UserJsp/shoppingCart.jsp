@@ -60,11 +60,14 @@
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
 ProductInfoService productservice=new ProductInfoService();
 shoplist=productservice.getProductList(user.getId());
-ProductModel product =(ProductModel)request.getSession().getAttribute("product");
-if (!shoplist.isEmpty()){
+ProductModel product =new ProductModel();
+//product=productservice.getProduct(product.getProductid());
+if (shoplist!=null){
 for(ShoppingcartModel shoppingcart:shoplist){
 %>
+<%product=productservice.getProduct(shoppingcart.getProductid()); %>
 <div class="shop">
+<p><strong>商品名称：</strong><%= product.getProductname() %></p>
 <p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
 <p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
 </div>
