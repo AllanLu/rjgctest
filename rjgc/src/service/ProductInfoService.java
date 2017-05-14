@@ -88,7 +88,9 @@ public class ProductInfoService {
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
 				shopping.setProductprice(rs.getFloat("Productprice"));
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartlist.add(shopping);
+				
 			}
 			if(!shoppingcartlist.isEmpty()){
 				return shoppingcartlist;
@@ -118,7 +120,7 @@ public class ProductInfoService {
 				shopping.setBuyerid(rs.getInt("Buyerid"));
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
-				
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartList.add(shopping);
 			}
 			if(!shoppingcartList.isEmpty()){
@@ -142,11 +144,11 @@ public class ProductInfoService {
 		//List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
 		try{
-			sql="delete  from Shoppingcart where Shoppingcartid=1";
+			sql="delete from rjgc.Shoppingcart where Shoppingcartid = 1";
 			PreparedStatement pstmt=conn0.prepareStatement(sql);
-			pstmt.setInt(1,Shoppingcartid);
-			ResultSet rs=pstmt.executeQuery();
-			rs.close();
+			//pstmt.setInt(1,Shoppingcartid);
+			pstmt.executeUpdate(sql);
+			//rs.close();
 			pstmt.close();
 			conn0.close();
 		}catch(SQLException e){

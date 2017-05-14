@@ -9,6 +9,7 @@
 <%@page import="service.ProductInfoService" %>
 <%
     String path = request.getContextPath();
+int num=1;
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,13 +72,16 @@ for(ShoppingcartModel shoppingcart:shoplist){
 <p><strong>商品名称：</strong><%= product.getProductname() %></p>
 <p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
 <p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
-<input type="checkbox"name="product"value="1"/>
+<p><strong>购物车id：</strong><%= shoppingcart.getShoppingcartid() %></p>
+<input type="checkbox"name="product<%=num %>"value="1"/>
+<a href="<%=path%>/shoppingCartController.do?Shoppingcartid=<%=shoppingcart.getShoppingcartid() %>">删除</a>
 <form action="<%=path%>/shoppingCartController.do"method="post">
 <% 
-session.setAttribute("shopcartid", shoppingcart.getShoppingcartid());
+//session.setAttribute("shopcartid", shoppingcart.getShoppingcartid());
 session.setAttribute("user", user);
 %>
 <input type="submit"value="删除"/></form>
+
 </div>
 <%
 }}else {
