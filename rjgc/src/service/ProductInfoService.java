@@ -137,4 +137,21 @@ public class ProductInfoService {
 		}
 		//获取购物车列表
 		
+	public  void Dropshoppingcart(int Shoppingcartid){
+		String sql="";
+		//List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
+		conn0=GetConnection.getConnection();
+		try{
+			sql="delete  from Shoppingcart where Shoppingcartid=1";
+			PreparedStatement pstmt=conn0.prepareStatement(sql);
+			pstmt.setInt(1,Shoppingcartid);
+			ResultSet rs=pstmt.executeQuery();
+			rs.close();
+			pstmt.close();
+			conn0.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		}
 }

@@ -61,6 +61,7 @@
 ProductInfoService productservice=new ProductInfoService();
 shoplist=productservice.getProductList(user.getId());
 ProductModel product =new ProductModel();
+int n=0;
 //product=productservice.getProduct(product.getProductid());
 if (shoplist!=null){
 for(ShoppingcartModel shoppingcart:shoplist){
@@ -70,6 +71,13 @@ for(ShoppingcartModel shoppingcart:shoplist){
 <p><strong>商品名称：</strong><%= product.getProductname() %></p>
 <p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
 <p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
+<input type="checkbox"name="product"value="1"/>
+<form action="<%=path%>/shoppingCartController.do"method="post">
+<% 
+session.setAttribute("shopcartid", shoppingcart.getShoppingcartid());
+session.setAttribute("user", user);
+%>
+<input type="submit"value="删除"/></form>
 </div>
 <%
 }}else {

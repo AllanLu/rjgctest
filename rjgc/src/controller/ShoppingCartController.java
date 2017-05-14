@@ -27,13 +27,17 @@ public class ShoppingCartController extends HttpServlet {
 		UserModel user=new UserModel();
 		HttpSession session = request.getSession();
 		user =(UserModel)session.getAttribute("user");
-		List<ShoppingcartModel> shop=new ArrayList<ShoppingcartModel>();
+		//List<ShoppingcartModel> shop=new ArrayList<ShoppingcartModel>();
+		//ShoppingcartModel shop=new ShoppingcartModel();
 		ProductInfoService productservice=new ProductInfoService();
-		shop=productservice.getProductList(user.getId());
-		session.setAttribute("shop", shop);
+		//shop= (ShoppingcartModel)session.getAttribute("shoppcart");
+		//session.setAttribute("shop", shop);
+		int shopid=(int) session.getAttribute("shopcartid");
+		productservice.Dropshoppingcart(shopid);
+		
 		//String path=request.getContextPath(); 
 		response.sendRedirect("jsp/UserJsp/shoppingCart.jsp");
-		//购物车控制器，调用ProductInfoService类的getProductList()方法获取session中的ProductModel对象列表
+		//购物车控制器,删除购物车表中的数据
 		//传递ProductModel对象列表并跳转到shoppingCart.jsp显示给用户
 	}
 }
