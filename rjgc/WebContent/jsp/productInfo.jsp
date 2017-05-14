@@ -85,9 +85,9 @@ supplier = supplierdao.getSupplierbyid(supplier);
         <button class="minus-btn" type="button" name="button">
             <img src="rjgc/../images/minus.svg" alt="">
         </button>
-        </div>
+     </div>
     <div class="product-price">
-      <span>￥<%= product.getProductprice()*num %></span>
+      <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
       <%String productnum=Integer.toString(num); 
 session.setAttribute("productnum", productnum);
@@ -118,7 +118,7 @@ session.setAttribute("product", product);
     			num = 0;
     		}
         $input.val(num);
-        
+        document.getElementById("price").innerHTML="￥"+num*<%= product.getProductprice()%>;
     	});
 
     	$('.plus-btn').on('click', function(e) {
@@ -126,13 +126,14 @@ session.setAttribute("product", product);
     		var $this = $(this);
     		var $input = $this.closest('div').find('input');
     		num = parseInt($input.val());
-       		if (num <1000 ) {
+       		if (num < <%=product.getStocknum()%> ) {
       		num = num + 1;
     		} else {
-    			num =1000 ;
+    			num =<%=product.getStocknum()%> ;
     		}
 
     		$input.val(num);
+    		document.getElementById("price").innerHTML="￥"+num*<%= product.getProductprice()%>;
     	});
 
       $('.like-btn').on('click', function() {
