@@ -152,22 +152,30 @@ public class ProductInfoService {
 		//将Productid写到product中，并调用getProductByProductid(ProductModel product)方法获取完整产品信息
 		return product;
 	}
+<<<<<<< HEAD
 	//根据username  查询购物车
 	public List<ShoppingcartModel> getProductList(String Username){
+=======
+	//����username  ��ѯ���ﳵ
+	public List<ShoppingcartModel> getProductList(int Userid){
+>>>>>>> origin/master
 		String sql="";
 		List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
 		try{
-			sql="select * from Shoppingcart where Buyername=?";
+			sql="select * from Shoppingcart where Buyerid=?";
 			PreparedStatement pstmt=conn0.prepareStatement(sql);
-			pstmt.setString(1, Username);
+			pstmt.setInt(1, Userid);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){
 				ShoppingcartModel shopping=new ShoppingcartModel();
 				shopping.setBuyerid(rs.getInt("Buyerid"));
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
+				shopping.setProductprice(rs.getFloat("Productprice"));
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartlist.add(shopping);
+				
 			}
 			if(!shoppingcartlist.isEmpty()){
 				return shoppingcartlist;
@@ -197,14 +205,15 @@ public class ProductInfoService {
 				shopping.setBuyerid(rs.getInt("Buyerid"));
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
-				
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartList.add(shopping);
 			}
 			if(!shoppingcartList.isEmpty()){
 				return shoppingcartList;
 				//request.getSession().setAttribute("productList",productList);
 				//response.sendRedirect("/rjgc/jsp/index.jsp");
-			}
+			} 
+			//else {return shoppingcartList;}
 			rs.close();
 			pstmt.close();
 			conn0.close();
@@ -213,6 +222,28 @@ public class ProductInfoService {
 		}
 		return null;	
 		}
+<<<<<<< HEAD
 		//获取购物车列表
 	
+=======
+		//��ȡ���ﳵ�б�
+		
+	public  void Dropshoppingcart(int Shoppingcartid){
+		String sql="";
+		//List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
+		conn0=GetConnection.getConnection();
+		try{
+			sql="delete from rjgc.Shoppingcart where Shoppingcartid = 1";
+			PreparedStatement pstmt=conn0.prepareStatement(sql);
+			//pstmt.setInt(1,Shoppingcartid);
+			pstmt.executeUpdate(sql);
+			//rs.close();
+			pstmt.close();
+			conn0.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		}
+>>>>>>> origin/master
 }

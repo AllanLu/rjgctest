@@ -7,57 +7,18 @@
 <%@ page import="dao.ProductDao" %>
 <%@ page import="model.ShoppingcartModel" %>
 <%@page import="service.ProductInfoService" %>
+<%
+    String path = request.getContextPath();
+int num=1;
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>我的购物车</title>
 <style type="text/css">
-#textarea {
-	position: absolute;
-	width: 356px;
-	height: 22px;
-	left: 667px;
-	top: 235px;
-}
-#button {
-	position: absolute;
-	left: 1029px;
-	top: 233px;
-	width: 57px;
-	height: 26px;
-	background-color: #D6D6D6;
-}
-#nav {
-	line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;
-}
-#form1 {
-	position: absolute;
-	left: 967px;
-	top: 576px;
-	height: 46px;
-	background-color: #FFFFFF;
-	width: 464px;
-	visibility: inherit;
-}
-body,td,th {
-	color: #630;
-	font-family: monospace;
-	font-weight: bold;
-}
-.首页 {
-	position: absolute;
-	background-color: #CCCCCC;
-	width: 79px;
-	height: 27px;
-	top: 632px;
-	left: 777px;
-}
+
+
 </style>
 </head>
 
@@ -94,26 +55,44 @@ body,td,th {
 <p><strong> 全部商品
 </strong></p>
 <hr />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="2.png" width="313" height="290" /></p>
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>您的购物车还是空的，赶紧购物吧~
-  </strong> &nbsp;&nbsp;&nbsp;
-  <input name="button3" type="submit" class="首页" id="button3" value="返回首页" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-  <p>&nbsp;</p>
+  
   <% UserModel user = (UserModel)request.getSession().getAttribute("user");
  //ArrayList<ShoppingcartModel> shoplist=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
 ProductInfoService productservice=new ProductInfoService();
-shoplist=productservice.getProductList(user.getName());
-ProductModel product =(ProductModel)request.getSession().getAttribute("product");
+shoplist=productservice.getProductList(user.getId());
+ProductModel product =new ProductModel();
+int n=0;
+//product=productservice.getProduct(product.getProductid());
+if (shoplist!=null){
 for(ShoppingcartModel shoppingcart:shoplist){
 %>
+<%product=productservice.getProduct(shoppingcart.getProductid()); %>
 <div class="shop">
-<p><%= shoppingcart.getProductnum() %></p>
-<p><%= shoppingcart.getProductprice() %></p>
+<p><strong>商品名称：</strong><%= product.getProductname() %></p>
+<p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
+<p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
+<p><strong>购物车id：</strong><%= shoppingcart.getShoppingcartid() %></p>
+<input type="checkbox"name="product<%=num %>"value="1"/>
+<a href="<%=path%>/shoppingCartController.do?Shoppingcartid=<%=shoppingcart.getShoppingcartid() %>">删除</a>
+<form action="<%=path%>/shoppingCartController.do"method="post">
+<% 
+//session.setAttribute("shopcartid", shoppingcart.getShoppingcartid());
+session.setAttribute("user", user);
+%>
+<input type="submit"value="删除"/></form>
+
 </div>
 <%
-}%>
+}}else {
+	%>
+	<div class="shop">
+	<p><strong>购物车为空 快去购买 </strong></p>
+	
+	</div>
+	<%
+} %>
+
+
 </body>
 </html>

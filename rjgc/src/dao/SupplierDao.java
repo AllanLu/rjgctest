@@ -60,4 +60,28 @@ public class SupplierDao{
 		}
 		return null;	
 	}
+	
+	public SupplierModel getSupplierbyid(SupplierModel supplier) throws SQLException {
+		//根据用户名从supplier表中获取完整商家对象
+		conn=GetConnection.getConnection();
+		try{
+			sql="select * from Supplier where Supplierid=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, supplier.getSupplierid());
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				supplier.setSuppliername(rs.getString("Suppliername"));
+				supplier.setSupplieraddress(rs.getString("Supplieraddress"));
+				supplier.setSupplierintroduction(rs.getString("Supplierintroduction"));
+				supplier.setSuppliertel(rs.getString("Suppliertel"));
+			}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		return supplier;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
+	}
 }

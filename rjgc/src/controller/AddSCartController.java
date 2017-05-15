@@ -26,21 +26,8 @@ public class AddSCartController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
-		//接收ProductModel对象和flag
-		//String path="../images/";
-	    //String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";
 		HttpSession session=request.getSession();
-		//Part image=request.getPart("image");
-		//String message="";
-		//String productName=request.getParameter("productName");
-		//String origin=request.getParameter("origin");
-		//String date=request.getParameter("date");
-		//String life=request.getParameter("life");
-		//String price=request.getParameter("price");
-		//String introduction=request.getParameter("introduction");
-		//String storedid=request.getParameter("storedid");
-		//String stockNum=request.getParameter("stockNum");
-		int productnum=Integer.parseInt(request.getParameter("Productnum"));
+		int productnum=Integer.parseInt(request.getParameter("productnum"));
 		ProductModel product =(ProductModel)session.getAttribute("product");
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		//boolean flag=(boolean)session.getAttribute("flag");
@@ -58,12 +45,12 @@ public class AddSCartController extends HttpServlet {
 		shopcart.setProductprice(price);
 		//shop.setShoppingcartid(shoppingcartid);//添加购物车id需要特殊方法
 		ProductDao productdao=new ProductDao();
-		PrintWriter out=response.getWriter();
-		out.println("<html><body>");
+		//PrintWriter out=response.getWriter();
+		//out.println("<html><body>");
 		try {
 			productdao.insertnewshoppingcart(shopcart);
-			out.println("添加成功！");
-			//response.sendRedirect("jsp/productinfo.jsp");
+			//out.println("添加成功！");
+			response.sendRedirect("jsp/user/shoppingCart.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

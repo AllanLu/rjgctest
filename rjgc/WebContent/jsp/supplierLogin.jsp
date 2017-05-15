@@ -46,7 +46,7 @@
 
       <button type="submit" class="btn btn-success">登录</button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="supplierRegist.jsp">注册</a>
+    <a href="SupplierJsp/supplierRegister.jsp">注册</a>
 </div>
     </form>
 

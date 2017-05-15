@@ -5,19 +5,24 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.util.*" %>
 <%@ page import="dao.ProductDao" %>
+<%@ page import="dao.SupplierDao" %>
+<%@ page import="model.SupplierModel" %>
 <%
     String path = request.getContextPath();
+	int num=1;
 	%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/productinfo.css">
+<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+<link href="https://fonts.lug.ustc.edu.cn/css?family=Roboto:300,400,500" rel="stylesheet">
 <title>商品信息</title>
 </head>
 
 <body>
+
 <div class="header">
 <%
 	if(request.getSession().getAttribute("user") != null) {
@@ -39,39 +44,101 @@
 %>
 </div>
 <% UserModel user = (UserModel)request.getSession().getAttribute("user");
-ProductModel product =(ProductModel)request.getSession().getAttribute("product");%>
-<div class="product">
-<div class="left">
-<div class="image"><img class="border="0"  src="rjgc/<%= product.getImagepath() %>" width=250px/></div>
-</div>
-<div class="info">
-<p>商品名称: <%= product.getProductname() %></p>
-<p>商品源: <%= product.getProductorigin() %></p>
-<p>价格: <%= product.getProductprice() %></p>
-<p>生产日期: <%= product.getProductdate() %></p>
-<p>过期日期: <%= product.getProductlife() %></p>
-<p>库存量: <%= product.getStocknum() %></p>
+ProductModel product =(ProductModel)request.getSession().getAttribute("product");
+String supplierid0=product.getSupplierid();
+int supplierid =Integer.parseInt(supplierid0);
+SupplierModel supplier=new SupplierModel();
+SupplierDao supplierdao=new SupplierDao();
+supplier.setSupplierid(supplierid);
+supplier = supplierdao.getSupplierbyid(supplier);
+%>
 
-
-<form action="<%=path%>/addSCartController.do"method=post>
-<% 
-product.setProductid(1);
+<main class="container">
+ 
+  <div class="left-column">
+    <img data-image="red" class="active" src="rjgc/<%= product.getImagepath() %>" alt="">
+  </div>
+ 
+ 
+  <div class="right-column">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+      <span></span>
+      <h1><%= product.getProductname() %></h1>
+<p><strong>单价: </strong><%= product.getProductprice() %></p>
+<p><strong>商品源: </strong><%= product.getProductorigin() %></p>
+<p><strong>生产日期: </strong><%= product.getProductdate() %></p>
+<p><strong>过期日期: </strong><%= product.getProductlife() %></p>
+<p><strong>库存量: </strong><%= product.getStocknum() %></p>
+<p><strong>商家名称: </strong><%= supplier.getSuppliername() %></p>
+<p><strong>商家地址: </strong><%= supplier.getSupplieraddress() %></p>
+<p><strong>商家介绍: </strong><%= supplier.getSupplierintroduction() %></p>
+<p><strong>商家电话：</strong><%= supplier.getSuppliertel() %></p>
+    </div>
+    <!-- Product Pricing -->
+	<div class="quantity">
+        <button class="plus-btn" type="button" name="button">
+            <img src="rjgc/../images/plus.svg" alt="">
+        </button>
+        <input type="text" name="name" value="1">
+        <button class="minus-btn" type="button" name="button">
+            <img src="rjgc/../images/minus.svg" alt="">
+        </button>
+     </div>
+    <div class="product-price">
+      <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
+      <form action="<%=path%>/confirmOrderController.do"method=post>
+      <%String productnum=Integer.toString(num); 
+session.setAttribute("productnum", productnum);
 session.setAttribute("user", user);
 session.setAttribute("product", product);
 %>
-<tr><div>数量:  <input type="text" name="Productnum" id="Productnum" size=4></div><br>
-<td><input type="submit" value="加入购物车"/></td>
-</tr>
+<td><input type="submit" value="立即购买"/></td>
 </form>
+<form action="<%=path%>/addSCartController.do"method=post>
+<%session.setAttribute("productnum", productnum);
+session.setAttribute("user", user);
+session.setAttribute("product", product);
+%>
+<td><input type="submit" value="加入购物车"/></td>
+</form>
+    </div>
 </div>
-<!--该jsp页面主要实现展示商品信息，其中有加入购物车按钮和购买按钮-->
-<!--该页面接收ProductInfoController类传来的ProductModel对象并显示-->
-<!--点击加入购物车时将ProductModel对象提交到/addSCartController.do，并令flag=productInfo-->
+</main>
+<script type="text/javascript">
+      $('.minus-btn').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		 num = parseInt($input.val());
+    		if (num > 1) {
+    			num = num - 1;
+    		} else {
+    			num = 0;
+    		}
+        $input.val(num);
+        document.getElementById("price").innerHTML="￥"+num*<%= product.getProductprice()%>;
+    	});
 
-<div class="detail">
-<hr/>
-<p style="font-size:20px">商品详情</p>
-<p><%= product.getProductintroduction() %></p></div>
-</div>
+    	$('.plus-btn').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		num = parseInt($input.val());
+       		if (num < <%=product.getStocknum()%> ) {
+      		num = num + 1;
+    		} else {
+    			num =<%=product.getStocknum()%> ;
+    		}
+
+    		$input.val(num);
+    		document.getElementById("price").innerHTML="￥"+num*<%= product.getProductprice()%>;
+    	});
+
+      $('.like-btn').on('click', function() {
+        $(this).toggleClass('is-active');
+      });
+</script>
 </body>
 </html>
