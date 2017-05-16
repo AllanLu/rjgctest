@@ -173,14 +173,15 @@ public class ProductDao {
 
 	public void insertnewshoppingcart(ShoppingcartModel newshoppingcart) throws SQLException{
 		conn=GetConnection.getConnection();
-		String sql="insert into Shoppingcart(Productid,Productnum,Productprice,Buyername,Shoppingcartid) values(?,?,?,?,?)";
+		String sql="insert into Shoppingcart(Productid,Productnum,Productprice,Buyername,Buyerid)"+ "values(?,?,?,?,?)";
 		try{
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,newshoppingcart.getProductid());
 			pstmt.setInt(2,newshoppingcart.getProductnum());
 			pstmt.setFloat(3,newshoppingcart.getProductprice());
 			pstmt.setString(4,newshoppingcart.getBuyername());
-			pstmt.setInt(5,newshoppingcart.getProductid()+15);
+			pstmt.setInt(5,newshoppingcart.getBuyerid());
+			//pstmt.setInt(5,newshoppingcart.getProductid()+15);
 			//pstmt.setInt(5, newshoppingcart.getShoppingcartid());
 			pstmt.executeUpdate();
 			pstmt.close();

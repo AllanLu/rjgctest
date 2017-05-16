@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,7 @@ public class AddSCartController extends HttpServlet {
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
-		int productnum=Integer.parseInt(request.getParameter("productnum"));
+		int productnum=Integer.parseInt((String)session.getAttribute("productnum"));
 		ProductModel product =(ProductModel)session.getAttribute("product");
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		//boolean flag=(boolean)session.getAttribute("flag");
@@ -35,6 +36,7 @@ public class AddSCartController extends HttpServlet {
 		float Productprice=product.getProductprice();
 		float price=Productprice*productnum;
 		String username=user.getName();
+		int userid=user.getId();
 		//int sid=(int)session.getAttribute("Supplierid");
 		//判断是否登录，若登录了，则带ProductModel返回productInfo.jsp页面
 		//boolean islogin=(boolean)session.getAttribute("islogin");
@@ -43,6 +45,7 @@ public class AddSCartController extends HttpServlet {
 		shopcart.setProductid(Productid);
 		shopcart.setProductnum(productnum);
 		shopcart.setProductprice(price);
+		shopcart.setBuyerid(userid);
 		//shop.setShoppingcartid(shoppingcartid);//添加购物车id需要特殊方法
 		ProductDao productdao=new ProductDao();
 		//PrintWriter out=response.getWriter();
@@ -50,7 +53,9 @@ public class AddSCartController extends HttpServlet {
 		try {
 			productdao.insertnewshoppingcart(shopcart);
 			//out.println("添加成功！");
-			response.sendRedirect("jsp/user/shoppingCart.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("jsp/UserJsp/shoppingCart.jsp");
+			rd.forward(request,response);
+			//response.sendRedirect("jsp/UserJsp/shoppingCart.jsp");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
