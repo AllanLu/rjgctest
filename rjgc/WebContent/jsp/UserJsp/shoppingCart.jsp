@@ -88,16 +88,17 @@ for(ShoppingcartModel shoppingcart:shoplist){
 } %>
 <form action="<%=path%>/confirmOrderController.do"method=post>
       <%
-      List<ShoppingcartModel> list=new ArrayList<ShoppingcartModel>();
-      String[] prolist=request.getParameterValues("product");
-      int j=0;
-      for (int i=0;i<num;i++){
-    	  if (prolist[i]!=null){
-    		 int k=Integer.parseInt(prolist[i]);
-    		 list.add(shoplist.get(k));	 
-    	  }    
-    	  }
-session.setAttribute("list", list);
+     // List<ShoppingcartModel> list=new ArrayList<ShoppingcartModel>();
+     // String[] prolist=request.getParameterValues("product");
+     // int j=0;
+      //for (int i=0;i<num;i++){
+    	//  if (prolist(i)!=null){
+    	//	 int k=Integer.parseInt(prolist[i]);
+    	//	 list.add(shoplist.get(k));	 
+    	// }    
+    	//  }
+//session.setAttribute("list", list);
+session.setAttribute("shoplist",shoplist);
 %>
 <td><input type="submit" value="确认购买"/></td>
 </form>

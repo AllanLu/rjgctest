@@ -7,14 +7,16 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 import dao.*;
 
 public class ProductInfoService {
+	java.sql.Connection conn0;
 	/**
-	 * 向数据库中添加商品信息
+	 * 鍚戞暟鎹簱涓坊鍔犲晢鍝佷俊鎭�
 	 * @param pModel
 	 * @return
 	 */
@@ -66,9 +68,9 @@ public class ProductInfoService {
 	
 	public ProductModel modifyProduct(ProductModel pModel){
 		java.sql.Connection conn =null;
-		//获得数据库连接
+		//鑾峰緱鏁版嵁搴撹繛鎺�
 		conn=GetConnection.getConnection();
-		//提取sid
+		//鎻愬彇sid
 		int pid=pModel.getProductid();
 		String pname=null;
 		String orgin=null;
@@ -149,16 +151,13 @@ public class ProductInfoService {
 		ProductDao pd=new ProductDao();
 		product.setProductid(Productid);
 		product=pd.getProductByProductid(Productid);
-		//将Productid写到product中，并调用getProductByProductid(ProductModel product)方法获取完整产品信息
+		//灏哖roductid鍐欏埌product涓紝骞惰皟鐢╣etProductByProductid(ProductModel product)鏂规硶鑾峰彇瀹屾暣浜у搧淇℃伅
 		return product;
 	}
-<<<<<<< HEAD
+
 	//根据username  查询购物车
-	public List<ShoppingcartModel> getProductList(String Username){
-=======
-	//����username  ��ѯ���ﳵ
 	public List<ShoppingcartModel> getProductList(int Userid){
->>>>>>> origin/master
+
 		String sql="";
 		List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
@@ -222,11 +221,9 @@ public class ProductInfoService {
 		}
 		return null;	
 		}
-<<<<<<< HEAD
+
+
 		//获取购物车列表
-	
-=======
-		//��ȡ���ﳵ�б�
 		
 	public  void Dropshoppingcart(int Shoppingcartid){
 		String sql="";
@@ -245,5 +242,5 @@ public class ProductInfoService {
 		}
 		
 		}
->>>>>>> origin/master
+
 }
