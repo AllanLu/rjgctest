@@ -3,14 +3,24 @@
 <html lang="zh-cn">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+    String path = request.getContextPath();
+	%>
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>供应商信息修改</title>
 
     <!-- Bootstrap -->
+
+
+
+    <link href="../css/sModify.css" rel="stylesheet"><!-- css位置 -->
+
     <link href="bootstrap.min.css" rel="stylesheet"><!-- css位置 -->
+
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,13 +31,14 @@
     <![endif]-->
   </head>
   <body>
+
   <div class="container-fluid">
 	<div class="row">
 	
 		<nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">首页</a><!-- 所有超链接待修改 -->
+        <a class="navbar-brand" href="index.jsp">首页</a><!-- 所有超链接待修改 -->
     </div>
     <div>
         <ul class="nav navbar-nav">
@@ -53,7 +64,7 @@
 		<div class = "col-md-4">
     		
 
-    			<form class = "form-horizontal" role="form" method="post" action="../SModify.do"><!-- servlet记得修改 -->
+    			<form class = "form-horizontal" name = "form1" role="form" method="post" action="../SModify.do"><!-- servlet记得修改 -->
     				<div class = "center">
       					<h2 class="text-center text-success">供应商信息修改</h2>
       					<%
@@ -85,8 +96,10 @@
         					
         					<textarea class="form-control" style="width:90%" rows="3" id="SupplierChangeIntro" placeholder=<%=sintro%> name="supplierintro" ></textarea>
       					</div>
-      					<button type="submit" class="btn btn-success">提交</button>
-
+      					
+      					
+      					<button class="btn btn-success">提交</button>
+      					
     					
 					</div>
     			</form>
@@ -98,6 +111,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="<%=path%>/js/bootstrap.min.js"></script>
   </body>
 </html>
