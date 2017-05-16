@@ -8,6 +8,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>首页</title>
 <link rel="stylesheet" href="../css/index.css">
 <link type="text/css" rel="stylesheet" href="../css/carousel.css">
@@ -42,8 +43,8 @@
 <div class="title">
 <img border="0" src="../images/foryou.png" height=250px width=250px/>
 <div class="search">
-<form action="../productInfoController.do" method="post">
-	<input type="text" name="keyword" placeholder="搜索商品">
+<form action="../Productsearch.do" method="post">
+	<input type="text" name="keyword" id="keyword" placeholder="搜索商品">
 	<button type="submit">搜索</button>
 </form>
 </div>

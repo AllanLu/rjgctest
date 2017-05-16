@@ -52,6 +52,7 @@ public class RegServlet extends HttpServlet {
 				isexist=userdao.RegCheck(user);
 				if(!isexist&&BuyerPassword!=""){
 					userdao.insertnewuser(user);
+					user=userdao.getUserByUsername(user);
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
 					response.sendRedirect("jsp/index.jsp");
