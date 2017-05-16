@@ -9,6 +9,7 @@
 <%@page import="service.ProductInfoService" %>
 <%
     String path = request.getContextPath();
+int num=0;
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -60,13 +61,21 @@
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
 ProductInfoService productservice=new ProductInfoService();
 shoplist=productservice.getProductList(user.getId());
-ProductModel product =(ProductModel)request.getSession().getAttribute("product");
-if (!shoplist.isEmpty()){
+ProductModel product =new ProductModel();
+int n=0;
+//product=productservice.getProduct(product.getProductid());
+if (shoplist!=null){
 for(ShoppingcartModel shoppingcart:shoplist){
 %>
+<%product=productservice.getProduct(shoppingcart.getProductid()); %>
 <div class="shop">
+<p><strong>商品名称：</strong><%= product.getProductname() %></p>
 <p><strong>购买数量：</strong><%= shoppingcart.getProductnum() %></p>
 <p><strong>总价：</strong><%= shoppingcart.getProductprice() %></p>
+<p><strong>购物车id：</strong><%= shoppingcart.getShoppingcartid() %></p>
+<input type="checkbox"name="product"value="<%=num %>"/>
+<a href="<%=path%>/shoppingCartController.do?Shoppingcartid=<%=shoppingcart.getShoppingcartid() %>">删除</a>
+<%num=num+1; %>
 </div>
 <%
 }}else {
@@ -77,7 +86,21 @@ for(ShoppingcartModel shoppingcart:shoplist){
 	</div>
 	<%
 } %>
-
+<form action="<%=path%>/confirmOrderController.do"method=post>
+      <%
+      List<ShoppingcartModel> list=new ArrayList<ShoppingcartModel>();
+      String[] prolist=request.getParameterValues("product");
+      int j=0;
+      for (int i=0;i<num;i++){
+    	  if (prolist[i]!=null){
+    		 int k=Integer.parseInt(prolist[i]);
+    		 list.add(shoplist.get(k));	 
+    	  }    
+    	  }
+session.setAttribute("list", list);
+%>
+<td><input type="submit" value="确认购买"/></td>
+</form>
 
 </body>
 </html>

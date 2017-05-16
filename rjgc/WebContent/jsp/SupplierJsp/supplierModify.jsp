@@ -10,7 +10,11 @@
     <title>供应商信息修改</title>
 
     <!-- Bootstrap -->
+<<<<<<< HEAD
+    <link href="../css/sModify.css" rel="stylesheet"><!-- css位置 -->
+=======
     <link href="bootstrap.min.css" rel="stylesheet"><!-- css位置 -->
+>>>>>>> origin/master
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,7 +31,7 @@
 		<nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">首页</a><!-- 所有超链接待修改 -->
+        <a class="navbar-brand" href="index.jsp">首页</a><!-- 所有超链接待修改 -->
     </div>
     <div>
         <ul class="nav navbar-nav">

@@ -1,28 +1,26 @@
 package service;
 import model.*;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.IOException;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import dao.*;
 
 public class ProductInfoService {
-	private Connection conn0;
+	/**
+	 * ÂêëÊï∞ÊçÆÂ∫ì‰∏≠Ê∑ªÂä†ÂïÜÂìÅ‰ø°ÊÅØ
+	 * @param pModel
+	 * @return
+	 */
 	public int addProductToProduct(ProductModel pModel){
 		java.sql.Connection conn =null;
-		ProductDao pDao=new ProductDao();
-		SupplierModel supplier=new SupplierModel();
-		SupplierDao sd=new SupplierDao();
+		conn=GetConnection.getConnection();
 		String productName=pModel.getProductname();
 		String origin=pModel.getProductorigin();
 		String pdate=pModel.getProductdate();
@@ -33,7 +31,7 @@ public class ProductInfoService {
 		int stockNum=pModel.getStocknum();
 		int sid=Integer.parseInt(pModel.getSupplierid());
 		String image=pModel.getImagepath();
-		String sql="insert into product(Productname,Productorigin,Productdate,Productlife,Productintrodution,Productprice,Supplierid,Stocknum,Storedid,imagepath)"
+		String sql="insert into product(Productname,Productorigin,Productdate,Productlife,Productintrodution,Productprice,Supplierid,Stocknum,Storedid,image)"
 				+ "values(?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps;
 		try {
@@ -54,6 +52,8 @@ public class ProductInfoService {
 			ps.setString(9,storedid+"");
 			ps.setString(10, image);
 			ps.execute();
+			conn.close();
+			ps.close();
 			return 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,17 +63,102 @@ public class ProductInfoService {
 		}
 		return -1;
 	}
-
+	
+	public ProductModel modifyProduct(ProductModel pModel){
+		java.sql.Connection conn =null;
+		//Ëé∑ÂæóÊï∞ÊçÆÂ∫ìËøûÊé•
+		conn=GetConnection.getConnection();
+		//ÊèêÂèñsid
+		int pid=pModel.getProductid();
+		String pname=null;
+		String orgin=null;
+		String date=null;
+		String life=null;
+		float price=0;
+		int stockNum=0;
+		String intro=null;
+		String storeid=null;
+		String image=null;
+		String sql="select * from product where Productid=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pid);
+			ResultSet rst=ps.executeQuery();
+			if(!rst.next()){
+				return null;
+			}else{
+				pname=rst.getString(2);
+				orgin=rst.getString(3);
+				date=rst.getString(4);
+				life=rst.getString(5);
+				intro=rst.getString(6);
+				price=rst.getFloat(7);
+				stockNum=rst.getInt(9);
+				storeid=rst.getString(10);
+				image=rst.getString(11);
+			}
+			if(pModel.getProductname()!=""){
+				pname=pModel.getProductname();
+			}
+			if(pModel.getImagepath()!=null){
+				image=pModel.getImagepath();
+			}
+			orgin=pModel.getProductorigin();
+			date=pModel.getProductdate();
+			life=pModel.getProductlife();
+			intro=pModel.getProductintroduction();
+			price=pModel.getProductprice();
+			stockNum=pModel.getStocknum();
+			storeid=pModel.getStoredid();
+			
+			sql="update product set Productname=?,Productorgin=?,Productdate=?,Productlife=?,Productintroduction=?,Productprice=?,Stocknum=?,Storedid=?,Imagepath=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1,pname);
+			ps.setString(2,orgin);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			java.util.Date pdate=sdf.parse(date);
+			java.util.Date lifedate=sdf.parse(life);
+			Timestamp tdate=new Timestamp(pdate.getTime());
+			Timestamp tlife=new Timestamp(lifedate.getTime());
+			ps.setTimestamp(3, tdate);
+			ps.setTimestamp(4, tlife);
+			ps.setString(5, intro);
+			ps.setFloat(6, price);
+			ps.setInt(7, stockNum);
+			ps.setString(8,storeid);
+			ps.setString(9, image);
+			ps.execute();
+			conn.close();
+			ps.close();
+			
+			pModel.setProductname(pname);
+			pModel.setImagepath(image);
+			
+			return pModel;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public ProductModel getProduct(int Productid) throws SQLException{
 		ProductModel product = new ProductModel();	
 		ProductDao pd=new ProductDao();
 		product.setProductid(Productid);
 		product=pd.getProductByProductid(Productid);
-		//Ω´Productid–¥µΩproduct÷–£¨≤¢µ˜”√getProductByProductid(ProductModel product)∑Ω∑®ªÒ»°ÕÍ’˚≤˙∆∑–≈œ¢
+		//Â∞ÜProductidÂÜôÂà∞product‰∏≠ÔºåÂπ∂Ë∞ÉÁî®getProductByProductid(ProductModel product)ÊñπÊ≥ïËé∑ÂèñÂÆåÊï¥‰∫ßÂìÅ‰ø°ÊÅØ
 		return product;
 	}
+<<<<<<< HEAD
+	//Ê†πÊçÆusername  Êü•ËØ¢Ë¥≠Áâ©ËΩ¶
+	public List<ShoppingcartModel> getProductList(String Username){
+=======
 	//∏˘æ›username  ≤È—Øπ∫ŒÔ≥µ
 	public List<ShoppingcartModel> getProductList(int Userid){
+>>>>>>> origin/master
 		String sql="";
 		List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
@@ -88,7 +173,9 @@ public class ProductInfoService {
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
 				shopping.setProductprice(rs.getFloat("Productprice"));
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartlist.add(shopping);
+				
 			}
 			if(!shoppingcartlist.isEmpty()){
 				return shoppingcartlist;
@@ -118,7 +205,7 @@ public class ProductInfoService {
 				shopping.setBuyerid(rs.getInt("Buyerid"));
 				shopping.setProductid(rs.getInt("Productid"));
 				shopping.setProductnum(rs.getInt("Productnum"));
-				
+				shopping.setShoppingcartid(rs.getInt("Shoppingcartid"));
 				shoppingcartList.add(shopping);
 			}
 			if(!shoppingcartList.isEmpty()){
@@ -126,6 +213,7 @@ public class ProductInfoService {
 				//request.getSession().setAttribute("productList",productList);
 				//response.sendRedirect("/rjgc/jsp/index.jsp");
 			} 
+			//else {return shoppingcartList;}
 			rs.close();
 			pstmt.close();
 			conn0.close();
@@ -134,6 +222,28 @@ public class ProductInfoService {
 		}
 		return null;	
 		}
+<<<<<<< HEAD
+		//Ëé∑ÂèñË¥≠Áâ©ËΩ¶ÂàóË°®
+	
+=======
 		//ªÒ»°π∫ŒÔ≥µ¡–±Ì
 		
+	public  void Dropshoppingcart(int Shoppingcartid){
+		String sql="";
+		//List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
+		conn0=GetConnection.getConnection();
+		try{
+			sql="delete from rjgc.Shoppingcart where Shoppingcartid = 1";
+			PreparedStatement pstmt=conn0.prepareStatement(sql);
+			//pstmt.setInt(1,Shoppingcartid);
+			pstmt.executeUpdate(sql);
+			//rs.close();
+			pstmt.close();
+			conn0.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		}
+>>>>>>> origin/master
 }
