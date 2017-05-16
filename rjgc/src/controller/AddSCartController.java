@@ -28,7 +28,8 @@ public class AddSCartController extends HttpServlet {
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
-		int productnum=Integer.parseInt((String)session.getAttribute("productnum"));
+		//int productnum=Integer.parseInt((String)session.getAttribute("productnum"));
+		int productnum=(int)session.getAttribute("productnum");
 		ProductModel product =(ProductModel)session.getAttribute("product");
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		//boolean flag=(boolean)session.getAttribute("flag");

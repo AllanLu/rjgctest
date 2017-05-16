@@ -89,15 +89,15 @@ supplier = supplierdao.getSupplierbyid(supplier);
     <div class="product-price">
       <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
-      <%String productnum=Integer.toString(num); 
-session.setAttribute("productnum", productnum);
+      <%//String productnum=Integer.toString(num); 
+session.setAttribute("productnum", num);
 session.setAttribute("user", user);
 session.setAttribute("product", product);
 %>
 <td><input type="submit" value="立即购买"/></td>
 </form>
 <form action="<%=path%>/addSCartController.do"method=post>
-<%session.setAttribute("productnum", productnum);
+<%session.setAttribute("productnum", num);
 session.setAttribute("user", user);
 session.setAttribute("product", product);
 %>
