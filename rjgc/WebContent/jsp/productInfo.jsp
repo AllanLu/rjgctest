@@ -90,7 +90,9 @@ supplier = supplierdao.getSupplierbyid(supplier);
      </div>
     <div class="product-price">
       <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
-      <form action="<%=path%>/confirmOrderController.do"method=post>
+     <%
+	if(request.getSession().getAttribute("user") != null) {
+     %> <form action="<%=path%>/confirmOrderController.do"method=post>
       <input type="hidden" name="product" value="0">
       <%//String productnum=Integer.toString(num); 
       //String[] prolist;
@@ -115,7 +117,12 @@ session.setAttribute("user", user);
 session.setAttribute("product", product);
 %>
 <td><input type="submit" value="加入购物车"/></td>
-</form>
+</form> <%} 
+	else{
+		out.print("<a href='jsp/login.jsp'>立即购买</a><p></p>");
+		out.print("<a href='jsp/login.jsp'>加入购物车</a><p></p>");
+	}
+%>
     </div>
 </div>
 </main>
