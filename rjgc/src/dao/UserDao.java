@@ -67,16 +67,17 @@ public class UserDao {
 	}
 	public void changeinfo(UserModel user) throws SQLException{
 		conn=GetConnection.getConnection();
-		String sql="UPDATE Buyer set Buyename=?,Buyertel=?,Buyeraddress=?,BuyerPassword=?,BuyerRealname=? where Buyerid=?";
+		String sql="update Buyer set Buyername=?,Buyertel=?,Buyeraddress=?,BuyerPassword=?,Realname=? where Buyerid=?";
 		try{
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,user.getName());
 			pstmt.setString(2,user.getTel());
 			pstmt.setString(3,user.getAddress());
 			pstmt.setString(4,user.getPassword());		
-			pstmt.setString(5, user.getRealName());
-			pstmt.setInt(6,user.getId());
+			pstmt.setString(5,user.getRealName());
+			pstmt.setString(6,Integer.toString(user.getId()));
 			pstmt.executeUpdate();
+			System.out.print("success");
 			pstmt.close();
 			conn.close();
 		}catch(Exception e){

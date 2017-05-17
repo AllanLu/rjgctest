@@ -26,8 +26,10 @@ public class LoginController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		String Buyername=request.getParameter("Buyername");
 		String BuyerPassword=request.getParameter("BuyerPassword");
+		System.out.println(Buyername);
 		//所传来界面的标记，flag决定了登录后跳转的界面或控制器
 		//String flag=request.getParameter("flag");
 		//Productid在跳转产品信息界面时有用

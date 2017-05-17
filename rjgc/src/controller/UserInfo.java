@@ -46,7 +46,7 @@ public class UserInfo extends HttpServlet {
 			String BuyerPassword=request.getParameter("BuyerPassword");
 			String BuyerTelephone=request.getParameter("BuyerTelephone");
 			String BuyerAddress=request.getParameter("BuyerAddress");
-			String BuyerRealname=request.getParameter("BuyerRealname");
+			String BuyerRealname=request.getParameter("RealName");
 			String BuyerId=request.getParameter("BuyerId");
 			UserModel user=new UserModel();
 			user.setName(Buyername);
@@ -54,7 +54,7 @@ public class UserInfo extends HttpServlet {
 			user.setTel(BuyerTelephone);
 			user.setAddress(BuyerAddress);
 			user.setRealName(BuyerRealname);
-			user.setId(Integer.parseInt(BuyerId));
+			if(BuyerId!=null)user.setId(Integer.parseInt(BuyerId));
 			UserDao userdao=new UserDao();
 			try{
 					userdao.changeinfo(user);
@@ -65,5 +65,4 @@ public class UserInfo extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
 }

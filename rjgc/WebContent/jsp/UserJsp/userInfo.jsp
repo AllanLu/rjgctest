@@ -53,7 +53,7 @@
 		<div class = "col-md-4">
     		
 
-    			<form class = "form-horizontal" role="form" method="post" action="../UModify.do"><!-- servlet记得修改 -->
+    			<form class = "form-horizontal" role="form" method="post" action="../../UModify.do"><!-- servlet记得修改 -->
     				<div class = "center">
       					<h2 class="text-center text-success">供应商信息修改</h2>
       					<%
@@ -65,7 +65,7 @@
       					</div>
       					<div class="form-group">
         					<label for="exampleInputEmail1"><strong>用户名</strong></label>
-        					<input type="text" name="Buyername" style="width:90%" class="form-control" id="Buyername" value=<%=user.getName()%> >
+        					<input type="text" name="Buyername" style="width:90%" class="form-control" id="Buyername">
       					</div>
       					<div class="form-group">
         					<label for="exampleInputPassword1">密码</label>
@@ -73,15 +73,15 @@
       					</div>
       					<div class="form-group">
         					<label for="exampleInputEmail1">联系方式</label>
-        					<input type="text" name="BuyerTelephone" style="width:90%" class="form-control" id="BuyerTelephone" placeholder="Tel" value=<%=user.getTel()%> >
+        					<input type="text" name="BuyerTelephone" style="width:90%" class="form-control" id="BuyerTelephone" placeholder="Tel">
       					</div>
       					<div class="form-group">
         					<label for="exampleInputEmail1">地址</label>
-        					<input type="text" name="BuyerAddress" style="width:90%" class="form-control" id="BuyerAddress" placeholder="Address" value=<%=user.getAddress()%> >
+        					<input type="text" name="BuyerAddress" style="width:90%" class="form-control" id="BuyerAddress" placeholder="Address" >
       					</div>
       					<div class="form-group">
         					<label for="exampleInputEmail1">真名</label>
-        					<input type="text" name="BuyerRealname" style="width:90%" class="form-control" id="BuyerRealname" placeholder="Realname" value=<%=user.getRealName()%> >
+        					<input type="text" name="RealName" style="width:90%" class="form-control" id="RealName" placeholder="Realname">
       					</div>
       					<button type="submit" class="btn btn-success">提交</button>
 

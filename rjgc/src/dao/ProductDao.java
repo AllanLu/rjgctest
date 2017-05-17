@@ -171,6 +171,42 @@ public class ProductDao {
 		return null;	
 		}
 
+	public ArrayList<ProductModel> search(String search){
+		conn=GetConnection.getConnection();
+		ArrayList<ProductModel> productList=null;
+		productList=new ArrayList<ProductModel>();
+		try{
+			sql="select * from Product where Productname like '%"+search+"%'";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1,search);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				ProductModel product=new ProductModel();
+				product.setProductid(rs.getInt("Productid"));
+				product.setProductname(rs.getString("Productname"));
+				product.setProductorigin(rs.getString("Productorigin"));
+				product.setProductdate(rs.getString("Productdate".toString()));
+				product.setProductintroduction(rs.getString("Productintroduction"));
+				product.setProductprice(rs.getFloat("Productprice"));
+				product.setSupplierid(rs.getString("Supplierid"));
+				product.setStocknum(rs.getInt("Stocknum"));
+				product.setImagepath(rs.getString("Imagepath"));
+				productList.add(product);
+			}
+			if(!productList.isEmpty()){
+				return productList;
+				//request.getSession().setAttribute("productList",productList);
+				//response.sendRedirect("/rjgc/jsp/index.jsp");
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;	
+		}
+	
 	public void insertnewshoppingcart(ShoppingcartModel newshoppingcart) throws SQLException{
 		conn=GetConnection.getConnection();
 		String sql="insert into Shoppingcart(Productid,Productnum,Productprice,Buyername,Buyerid)"+ "values(?,?,?,?,?)";
