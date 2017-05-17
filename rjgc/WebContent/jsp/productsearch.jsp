@@ -20,7 +20,7 @@
 	if(request.getSession().getAttribute("user") != null) {
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		out.print("<div class='useronline'>你好！  "+user.getName()+"</div>");
-		out.print("<div class='supplier'><a href='UserJsp/userInfo.jsp'>个人中心</a>");
+		out.print("<div class='supplier'><a href='rjgc/../jsp/UserJsp/userInfo.jsp'>个人中心</a>");
 		out.print("<a href='rjgc/../jsp/UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
 		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家登录</a>");
 		out.print("<a href='rjgc/../jsp/supplierLogin.jsp'>商家中心</a></div>");
