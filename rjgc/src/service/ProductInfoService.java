@@ -230,10 +230,10 @@ public class ProductInfoService {
 		//List<ShoppingcartModel> shoppingcartlist = new ArrayList<ShoppingcartModel>();
 		conn0=GetConnection.getConnection();
 		try{
-			sql="delete from rjgc.Shoppingcart where Shoppingcartid = 1";
+			sql="delete from rjgc.Shoppingcart where Shoppingcartid = ?";
 			PreparedStatement pstmt=conn0.prepareStatement(sql);
-			//pstmt.setInt(1,Shoppingcartid);
-			pstmt.executeUpdate(sql);
+			pstmt.setInt(1,Shoppingcartid);
+			pstmt.executeUpdate();
 			//rs.close();
 			pstmt.close();
 			conn0.close();
