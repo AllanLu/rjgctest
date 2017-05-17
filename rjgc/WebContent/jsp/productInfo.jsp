@@ -7,6 +7,7 @@
 <%@ page import="dao.ProductDao" %>
 <%@ page import="dao.SupplierDao" %>
 <%@ page import="model.SupplierModel" %>
+<%@ page import="model.ShoppingcartModel" %>
 <%
     String path = request.getContextPath();
 	int num=1;
@@ -29,6 +30,7 @@
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		out.print("<div class='useronline'>你好！  "+user.getName()+"</div>");
 		out.print("<div class='supplier'><a href='jsp/UserJsp/userInfo.jsp'>个人中心</a>");
+		out.print("<a href='jsp/index.jsp'>返回首页</a><p>丨</p>");
 		out.print("<a href='jsp/UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
 		out.print("<a href='jsp/supplierLogin.jsp'>商家登录</a>");
 		out.print("<a href='jsp/supplierLogin.jsp'>商家中心</a></div>");
@@ -90,9 +92,19 @@ supplier = supplierdao.getSupplierbyid(supplier);
       <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
       <%//String productnum=Integer.toString(num); 
-session.setAttribute("productnum", num);
+      String[] prolist;
+      //prolist[0]="0";
+      List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
+      ShoppingcartModel pro=new ShoppingcartModel();
+      pro.setBuyerid(user.getId());
+      pro.setProductid(product.getProductid());
+      pro.setProductnum(num);
+      pro.setProductprice(product.getProductprice()*num);
+//session.setAttribute("productnum", num);
 session.setAttribute("user", user);
 session.setAttribute("product", product);
+shoplist.add(pro);	 
+session.setAttribute("shoplist",shoplist);
 %>
 <td><input type="submit" value="立即购买"/></td>
 </form>

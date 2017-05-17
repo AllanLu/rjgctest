@@ -30,6 +30,7 @@ int num=0;
 		UserModel user = (UserModel)request.getSession().getAttribute("user");
 		out.print("<div class='useronline'>你好！  "+user.getName()+"</div>");
 		out.print("<div class='supplier'><a href='../UserJsp/userInfo.jsp'>个人中心</a>");
+		out.print("<a href='../index.jsp'>返回首页</a><p>丨</p>");
 		out.print("<a href='../UserJsp/shoppingCart.jsp'>购物车</a><p>丨</p>");
 		out.print("<a href='../supplierLogin.jsp'>商家登录</a>");
 		out.print("<a href='../supplierLogin.jsp'>商家中心</a></div>");
@@ -55,7 +56,7 @@ int num=0;
 <p><strong> 全部商品
 </strong></p>
 <hr />
-  
+ 
   <% UserModel user = (UserModel)request.getSession().getAttribute("user");
  //ArrayList<ShoppingcartModel> shoplist=(ArrayList<ShoppingcartModel>)session.getAttribute("shop");
  List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
@@ -63,6 +64,8 @@ ProductInfoService productservice=new ProductInfoService();
 shoplist=productservice.getProductList(user.getId());
 ProductModel product =new ProductModel();
 int n=0;
+%> <form action="<%=path%>/confirmOrderController.do"method=post>
+<%
 //product=productservice.getProduct(product.getProductid());
 if (shoplist!=null){
 for(ShoppingcartModel shoppingcart:shoplist){
@@ -86,7 +89,7 @@ for(ShoppingcartModel shoppingcart:shoplist){
 	</div>
 	<%
 } %>
-<form action="<%=path%>/confirmOrderController.do"method=post>
+
       <%
      // List<ShoppingcartModel> list=new ArrayList<ShoppingcartModel>();
      // String[] prolist=request.getParameterValues("product");
