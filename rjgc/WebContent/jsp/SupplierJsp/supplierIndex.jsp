@@ -39,12 +39,12 @@ for(ProductModel product:productList){
 %>
 <div class="product">
 <div class"pic"><a href="<%=request.getContextPath()%>/ProductModifyController.do?productid=<%=product.getProductid() %>"><img border="0" src="../<%= product.getImagepath() %>" height=150px width=150px/></a></div>
-<div class="detail"><p><%= product.getProductname() %></p>
-<p><%= product.getProductorigin() %></p>
-<p><%= product.getProductdate() %></p>
-<p><%= product.getProductprice() %></p>
-<p><%= product.getProductintroduction() %></p>
-<p><%= product.getSupplierid() %></p></div>
+<div class="detail"><p>产品名称：<%= product.getProductname() %></p>
+<p>来源：<%= product.getProductorigin() %></p>
+<p>生产日期：<%= product.getProductdate() %></p>
+<p>价格：<%= product.getProductprice() %></p>
+<p>介绍：<%= product.getProductintroduction() %></p>
+<p>商家：<%= product.getSupplierid() %></p></div>
 </div>
 
 <%
