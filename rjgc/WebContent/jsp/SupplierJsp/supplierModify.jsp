@@ -19,7 +19,7 @@
 
     <link href="<%=path%>/css/sModify.css" rel="stylesheet"><!-- css位置 -->
 
-    <link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet"><!-- css位置 -->
+
 
 
 
@@ -117,32 +117,29 @@
     <script  language="JavaScript" type="text/javascript">
       					function auth(){ 
       						
-      						//var name = $("SupplierChangeName").val();
+      						
       						var name = document.getElementById("SupplierChangeName").value;
       						var pass = document.getElementById("SupplierChangePassword").value;
-      						//var pass = $("SupplierChangePassword").val();
+      						
       						
       						var flag;
       						flag = 1;
       						if(name == undefined || name ==''||name==null){
       							$("#btn").attr("disabled",true);
       							document.getElementById("SupplierChangeName").placeholder="请输入用户名";
-      							//document.getElementById("SupplierChangeName").focus();
-      							//console.log("null name "+name);
+      							
       							flag=0;
       						}
       						if(pass == undefined || pass == '' || pass==null){
       							$("#btn").attr("disabled",true);
       							document.getElementById("SupplierChangePassword").placeholder="请输入密码";
-      							//document.getElementById("SupplierChangePassword").focus();
-      							//console.log("null pass "+pass);
+      							
       							flag=0;
       						}
       						
       						if(flag==1){
       						$("#btn").removeAttr("disabled");
-      						//console.log(name);
-      						//console.log(pass);
+      						
       						
       						}
       						
@@ -152,5 +149,8 @@
       						 
       						
       					</script>
+      					<div class="footer">
+<p>Copyright 2017 by 141.</p>
+</div>
   </body>
 </html>

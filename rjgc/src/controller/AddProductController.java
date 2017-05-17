@@ -17,7 +17,7 @@ import javax.servlet.http.Part;
 import model.*;
 import service.*;
 /**
- * å•†å®¶æ–°åŠ å•†å“
+ * ÉÌ¼ÒĞÂ¼ÓÉÌÆ·
  */
 @WebServlet("/addproduct.do")
 @MultipartConfig
@@ -33,13 +33,13 @@ public class AddProductController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//æ¥å—jspé¡µé¢ä¼ é€çš„æ•°æ®
-		String path="../images/";//è°ƒç”¨è·¯å¾„
-	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";//å­˜å‚¨è·¯å¾„
+		//½ÓÊÜjspÒ³Ãæ´«ËÍµÄÊı¾İ
+		String path="../images/";//µ÷ÓÃÂ·¾¶
+	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";//´æ´¢Â·¾¶
 		HttpSession session=request.getSession();
-		Part image=request.getPart("image");//è·å¾—å›¾ç‰‡æ–‡ä»¶
+		Part image=request.getPart("image");//»ñµÃÍ¼Æ¬ÎÄ¼ş
 		String message="";
-		//è·å¾—å•†å“çš„ä¿¡æ¯
+		//»ñµÃÉÌÆ·µÄĞÅÏ¢
 		String productName=request.getParameter("productName");
 		String origin=request.getParameter("origin");
 		String date=request.getParameter("date");
@@ -48,29 +48,30 @@ public class AddProductController extends HttpServlet {
 		String introduction=request.getParameter("introduction");
 		String storedid=request.getParameter("storedid");
 		String stockNum=request.getParameter("stockNum");
-		//å–å¾—sid
+		String pType=request.getParameter("type");
+		//È¡µÃsid
 		SupplierModel sModel=(SupplierModel)session.getAttribute("supplier");
 		int sid=sModel.getSupplierid();
 		
-		if(image==null){//åˆ¤æ–­å›¾ç‰‡æ˜¯å¦å­˜åœ¨
-			message="ç¼ºå°‘å›¾ç‰‡æ–‡ä»¶";
+		if(image==null){//ÅĞ¶ÏÍ¼Æ¬ÊÇ·ñ´æÔÚ
+			message="È±ÉÙÍ¼Æ¬ÎÄ¼ş";
 			session.setAttribute("message", message);
 			session.setAttribute("flag", true);
 			response.sendRedirect("jsp/supplierAddProduct.jsp");
-		}else if(image.getSize()>3*1024*1024) {//åˆ¤æ–­å¤§å°æ˜¯å¦è¶…æ ‡
+		}else if(image.getSize()>3*1024*1024) {//ÅĞ¶Ï´óĞ¡ÊÇ·ñ³¬±ê
 			image.delete();
-			message="å›¾ç‰‡æ–‡ä»¶å¤ªå¤§ï¼Œè¯·é‡æ–°é€‰æ‹©";
+			message="Í¼Æ¬ÎÄ¼şÌ«´ó£¬ÇëÖØĞÂÑ¡Ôñ";
 			session.setAttribute("message", message);
 			session.setAttribute("flag", true);
 			response.sendRedirect("jsp/supplierAddProduct.jsp");
-		//è¿æ¥æ•°æ®åº“è°ƒç”¨å­˜å‚¨è¿‡ç¨‹ï¼Œå¹¶å­˜æ”¾å›¾ç‰‡
+		//Á¬½ÓÊı¾İ¿âµ÷ÓÃ´æ´¢¹ı³Ì£¬²¢´æ·ÅÍ¼Æ¬
 		}else{
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//è·å–å½“å‰æ—¶é—´
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//»ñÈ¡µ±Ç°Ê±¼ä
 			//SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=df.format(new Date());
 			path=path+sid+"_"+time+".jpg";
-			imagePath=imagePath+sid+"_"+time+".jpg";//æ–‡ä»¶åæ ¼å¼ï¼šsid_20XX05XX10XX00.jpg
-			//å°è£…
+			imagePath=imagePath+sid+"_"+time+".jpg";//ÎÄ¼şÃû¸ñÊ½£ºsid_20XX05XX10XX00.jpg
+			//·â×°
 			ProductModel pModel=new ProductModel();
 			pModel.setProductdate(date);
 			pModel.setProductname(productName);
@@ -82,20 +83,21 @@ public class AddProductController extends HttpServlet {
 			pModel.setStocknum(Integer.parseInt(stockNum));
 			pModel.setStoredid(storedid);
 			pModel.setProductintroduction(introduction);
-			//è°ƒç”¨æ·»åŠ å•†å“çš„æœåŠ¡ç±»æ–¹æ³•
+			pModel.setProductsort(pType);
+			//µ÷ÓÃÌí¼ÓÉÌÆ·µÄ·şÎñÀà·½·¨
 			ProductInfoService pService=new ProductInfoService();
 			int stat=pService.addProductToProduct(pModel);
-			//åˆ¤æ–­è¿”å›å€¼
+			//ÅĞ¶Ï·µ»ØÖµ
 			if(stat==0){
 				File file=new File(imagePath);
 				file.createNewFile();
 				image.write(imagePath);
-				message="æ¸¸æˆå‘å¸ƒæˆåŠŸï¼";
+				message="³É¹¦£¡";
 				session.setAttribute("message", message);
 				session.setAttribute("flag", true);
 				response.sendRedirect("jsp/SupplierJsp/supplierindex.jsp");
 			}else{
-				message="æ·»åŠ å¤±è´¥";
+				message="Ìí¼ÓÊ§°Ü";
 				session.setAttribute("message", message);
 				session.setAttribute("flag", true);
 				response.sendRedirect("jsp/SupplierJsp/supplierAddProduct.jsp");
@@ -112,3 +114,4 @@ public class AddProductController extends HttpServlet {
 	}
 
 }
+

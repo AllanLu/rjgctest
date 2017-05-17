@@ -32,16 +32,16 @@ public class ProductInfoEditController extends HttpServlet {
     }
 
 	/**
-	 * ä¿®æ”¹å•†å“ä¿¡æ¯
+	 * ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		ProductModel pModel=(ProductModel)session.getAttribute("product");//è·å–pid
-		String path="../images/";//è°ƒç”¨è·¯å¾„
-	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";//å­˜å‚¨è·¯å¾„
-		Part image=request.getPart("image");//è·å¾—å›¾ç‰‡æ–‡ä»¶
+		ProductModel pModel=(ProductModel)session.getAttribute("product");//»ñÈ¡pid
+		String path="../images/";//µ÷ÓÃÂ·¾¶
+	    String imagePath =request.getSession().getServletContext().getRealPath("")+"/images/";//´æ´¢Â·¾¶
+		Part image=request.getPart("image");//»ñµÃÍ¼Æ¬ÎÄ¼ş
 		String message="";
-		//è·å¾—å•†å“çš„ä¿¡æ¯
+		//»ñµÃÉÌÆ·µÄĞÅÏ¢
 		String productName=request.getParameter("productName");
 		String origin=request.getParameter("origin");
 		String date=request.getParameter("date");
@@ -50,16 +50,17 @@ public class ProductInfoEditController extends HttpServlet {
 		String introduction=request.getParameter("introduction");
 		String storedid=request.getParameter("storedid");
 		String stockNum=request.getParameter("stockNum");
+		String pType=request.getParameter("type");
 		SupplierModel sModel=(SupplierModel)session.getAttribute("supplier");
 		int sid=sModel.getSupplierid();
 		if(image==null){
 			pModel.setImagepath(null);
 		}else{
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//è·å–å½“å‰æ—¶é—´
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//»ñÈ¡µ±Ç°Ê±¼ä
 			//SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=df.format(new Date());
 			path=path+sid+"_"+time+".jpg";
-			imagePath=imagePath+sid+"_"+time+".jpg";//æ–‡ä»¶åæ ¼å¼ï¼šsid_20XX05XX10XX00.jpg
+			imagePath=imagePath+sid+"_"+time+".jpg";//ÎÄ¼şÃû¸ñÊ½£ºsid_20XX05XX10XX00.jpg
 			pModel.setImagepath(path);
 		}
 		pModel.setProductdate(date);
@@ -71,10 +72,11 @@ public class ProductInfoEditController extends HttpServlet {
 		pModel.setStocknum(Integer.parseInt(stockNum));
 		pModel.setStoredid(storedid);
 		pModel.setProductintroduction(introduction);
+		pModel.setProductsort(pType);
 		ProductInfoService pService=new ProductInfoService();
 		ProductModel result=pService.modifyProduct(pModel);
 		if(result==null){
-			message="ä¿®æ”¹ä¿¡æ¯å¤±è´¥";
+			message="ĞŞ¸ÄĞÅÏ¢Ê§°Ü";
 			session.setAttribute("message", message);
 			session.setAttribute("flag", true);
 			response.sendRedirect("jsp/SupplierJsp/supplierChangeProduct.jsp");

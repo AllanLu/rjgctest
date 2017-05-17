@@ -1,13 +1,9 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-    String path = request.getContextPath();
-	%>
-
 <html>
 <head>
-<title>发布商品</title>
+<title>添加商品</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
@@ -15,14 +11,14 @@
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
 <!-- Bootstrap Core CSS -->
-<link href="<%=path%>/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="../../css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="<%=path%>/css/style.css" rel='stylesheet' type='text/css' />
+<link href="../../css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="../css/morris.css" type="text/css" />
 <!-- Graph CSS -->
-<link href="<%=path%>/css/font-awesome.css" rel="stylesheet">
+<link href="../../css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
-<script src="<%=path%>/js/jquery-2.1.4.min.js"></script>
+<script src="../../js/jquery-2.1.4.min.js"></script>
 <!-- //jQuery -->
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400'
@@ -52,7 +48,7 @@
 							<div class="inbox-right">
 
 								<div class="mailbox-content">
-									<form action="../addproduct.do" method="post"
+									<form action="../../addproduct.do" method="post"
 										enctype="multipart/form-data">
 										<table class="table">
 											<tbody>
@@ -97,6 +93,16 @@
 														<h6>库存</h6> <input type="number" class="form-control"
 														name="stockNum">
 													</td>
+												</tr>
+												<tr class="table-row">
+												<td class="table-text">
+												<h6>分类</h6><select id="type" name="type">
+													<option value="蔬菜">蔬菜</option>
+													<option value="水果">水果</option>
+													<option value="禽肉类">禽肉类</option>
+													<option value="水产品">水产品</option>
+												</select>
+												</td>
 												</tr>
 												<tr class="table-row">
 
@@ -149,37 +155,11 @@
 				<div class="inner-block"></div>
 				<!--inner block end here-->
 				<!--copy rights start here-->
-				<div class="copyrights">
-					<p>
-						Copyright &copy; 2016.Company name All rights reserved.
-					</p>
-				</div>
+				
 				<!--COPY rights end here-->
 			</div>
 		</div>
-		<!--//content-inner-->
-		<!--/sidebar-menu-->
-		<div class="sidebar-menu">
-			<header class="logo1">
-				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span>
-				</a>
-			</header>
-			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
-			<div class="menu">
-				<ul id="menu">
-					<li><a href="../releasedisplay.do?page=1"><i
-							class="fa fa-tachometer"></i> <span>商品列表</span>
-						<div class="clearfix"></div></a></li>
-
-
-					<li id="menu-academico"><a href="gameRel.jsp"><i
-							class="fa fa-envelope nav_icon"></i><span>添加商品</span>
-						<div class="clearfix"></div></a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-	</div>
+		
 	<script>
 		var toggle = true;
 
@@ -205,10 +185,10 @@
 				});
 	</script>
 	<!--js -->
-	<script src="<%=path%>/js/jquery.nicescroll.js"></script>
-	<script src="<%=path%>/js/scripts.js"></script>
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
 	<!-- Bootstrap Core JavaScript -->
-	<script src="<%=path%>/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<!-- /Bootstrap Core JavaScript -->
 
 </body>

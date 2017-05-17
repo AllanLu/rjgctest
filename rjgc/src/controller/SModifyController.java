@@ -30,8 +30,8 @@ public class SModifyController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		SupplierModel sModel=(SupplierModel)session.getAttribute("supplier");//获取sid
-		//获得修改的信息
+		SupplierModel sModel=(SupplierModel)session.getAttribute("supplier");//鑾峰彇sid
+		//鑾峰緱淇敼鐨勪俊鎭�
 		String stel=request.getParameter("suppliertel");
 		String sintro=request.getParameter("supplierintro");
 		String spw=request.getParameter("supplierpassword");
@@ -43,10 +43,10 @@ public class SModifyController extends HttpServlet {
 		sModel.setSuppliertel(stel);
 		sModel.setSupplierPassword(spw);
 		sModel.setSuppliername(sname);
-		//调用服务类方法
+		//璋冪敤鏈嶅姟绫绘柟娉�
 		SupplierService service=new SupplierService();
 		SupplierModel result=service.SupplierModify(sModel);
-		//判断返回
+		//鍒ゆ柇杩斿洖
 		if(result==null){
 			message="修改信息失败";
 			session.setAttribute("message", message);

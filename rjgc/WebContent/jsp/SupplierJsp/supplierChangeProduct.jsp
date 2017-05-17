@@ -45,6 +45,7 @@ int pstock=pModel.getStocknum();
 String pintro=pModel.getProductintroduction();
 String pstore=pModel.getStoredid();
 String pimg=pModel.getImagepath();
+String ptype=pModel.getProductsort();
 						%>
 </head>
 <body>
@@ -66,7 +67,7 @@ String pimg=pModel.getImagepath();
 							<div class="inbox-right">
 
 								<div class="mailbox-content">
-									<form action="../addproduct.do" method="post"
+									<form action="../../productinfoedit.do" method="post"
 										enctype="multipart/form-data">
 										<table class="table">
 											<tbody>
@@ -111,6 +112,16 @@ String pimg=pModel.getImagepath();
 														<h6>库存</h6> <input type="number" class="form-control"
 														name="stockNum" value=<%=pstock%>>
 													</td>
+												</tr>
+												<tr class="table-row">
+												<td class="table-text">
+												<h6>分类</h6><select id="type" name="type">
+													<option value="蔬菜" ${ptype=="蔬菜"?'selected':''}>蔬菜</option>
+													<option value="水果" ${ptype=="水果"?'selected':''}>水果</option>
+													<option value="禽肉类" ${ptype=="禽肉类"?'selected':''}>禽肉类</option>
+													<option value="水产品" ${ptype=="水产品"?'selected':''}>水产品</option>
+												</select>
+												</td>
 												</tr>
 												<tr class="table-row">
 
@@ -163,37 +174,10 @@ String pimg=pModel.getImagepath();
 				<div class="inner-block"></div>
 				<!--inner block end here-->
 				<!--copy rights start here-->
-				<div class="copyrights">
-					<p>
-						Copyright &copy; 2016.Company name All rights reserved.
-					</p>
-				</div>
 				<!--COPY rights end here-->
 			</div>
 		</div>
-		<!--//content-inner-->
-		<!--/sidebar-menu-->
-		<div class="sidebar-menu">
-			<header class="logo1">
-				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span>
-				</a>
-			</header>
-			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
-			<div class="menu">
-				<ul id="menu">
-					<li><a href="../releasedisplay.do?page=1"><i
-							class="fa fa-tachometer"></i> <span>商品列表</span>
-						<div class="clearfix"></div></a></li>
-
-
-					<li id="menu-academico"><a href="gameRel.jsp"><i
-							class="fa fa-envelope nav_icon"></i><span>添加商品</span>
-						<div class="clearfix"></div></a></li>
-				</ul>
-			</div>
 		</div>
-		<div class="clearfix"></div>
-	</div>
 	<script>
 		var toggle = true;
 
