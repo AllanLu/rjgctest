@@ -46,6 +46,7 @@
 </div>
 <div class="sort">
 <ul>
+
 <li><a href="rjgc/../jsp/index.jsp">首页</a>
 <li><a href="<%=request.getContextPath() %>/Productsort.do?productsort=蔬菜">蔬菜</a></li>
 <li><a href="<%=request.getContextPath() %>/Productsort.do?productsort=水果">水果</a></li>
