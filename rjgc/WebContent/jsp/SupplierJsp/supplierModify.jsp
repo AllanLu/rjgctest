@@ -17,9 +17,9 @@
 
 
 
-    <link href="../css/sModify.css" rel="stylesheet"><!-- css位置 -->
+    <link href="<%=path%>/css/sModify.css" rel="stylesheet"><!-- css位置 -->
 
-    <link href="bootstrap.min.css" rel="stylesheet"><!-- css位置 -->
+    <link href="<%=path%>/css/bootstrap.min.css" rel="stylesheet"><!-- css位置 -->
 
 
 
@@ -42,8 +42,8 @@
     </div>
     <div>
         <ul class="nav navbar-nav">
-            <li><a href="#">买家中心</a></li>
-            <li><a href="#">卖家中心</a></li>
+           
+            <li><a href="supplierIndex.jsp">卖家中心</a></li>
             
         </ul>
     </div>
@@ -59,12 +59,13 @@
 %>
 	
 	</div>
+	
 	<div class = "row">
 		<div class = "col-md-4"></div>
 		<div class = "col-md-4">
     		
 
-    			<form class = "form-horizontal" name = "form1" role="form" method="post" action="../SModify.do"><!-- servlet记得修改 -->
+    			<form class = "form-horizontal"  role="form" method="post" action="<%=path%>/SModify.do"><!-- servlet记得修改 -->
     				<div class = "center">
       					<h2 class="text-center text-success">供应商信息修改</h2>
       					<%
@@ -77,11 +78,11 @@
 						%>
       					<div class="form-group">
         					<label for="exampleInputEmail1"><strong>供应商名称</strong></label>
-        					<input type="text" name="SupplierChangeName" style="width:90%" class="form-control" id="SupplierChangeName" value=<%=sname%> >
+        					<input type="text" name="SupplierChangeName" style="width:90%" class="form-control" id="SupplierChangeName" value="<%=sname%>" >
       					</div>
       					<div class="form-group">
         					<label for="exampleInputPassword1">供应商密码</label>
-        					<input type="password" name="supplierpassword" style="width:90%" class="form-control" id="SupplierChangePassword" placeholder="Password">
+        					<input type="password" name="supplierpassword" style="width:90%" class="form-control" id="SupplierChangePassword" placeholder="Password" value="" >
       					</div>
       					<div class="form-group">
         					<label for="exampleInputEmail1">供应商联系方式</label>
@@ -98,7 +99,8 @@
       					</div>
       					
       					
-      					<button class="btn btn-success">提交</button>
+      					<button class="btn btn-success"  type="submit" id="btn">提交</button>
+      					
       					
     					
 					</div>
@@ -112,5 +114,43 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/bootstrap.min.js"></script>
+    <script  language="JavaScript" type="text/javascript">
+      					function auth(){ 
+      						
+      						//var name = $("SupplierChangeName").val();
+      						var name = document.getElementById("SupplierChangeName").value;
+      						var pass = document.getElementById("SupplierChangePassword").value;
+      						//var pass = $("SupplierChangePassword").val();
+      						
+      						var flag;
+      						flag = 1;
+      						if(name == undefined || name ==''||name==null){
+      							$("#btn").attr("disabled",true);
+      							document.getElementById("SupplierChangeName").placeholder="请输入用户名";
+      							//document.getElementById("SupplierChangeName").focus();
+      							//console.log("null name "+name);
+      							flag=0;
+      						}
+      						if(pass == undefined || pass == '' || pass==null){
+      							$("#btn").attr("disabled",true);
+      							document.getElementById("SupplierChangePassword").placeholder="请输入密码";
+      							//document.getElementById("SupplierChangePassword").focus();
+      							//console.log("null pass "+pass);
+      							flag=0;
+      						}
+      						
+      						if(flag==1){
+      						$("#btn").removeAttr("disabled");
+      						//console.log(name);
+      						//console.log(pass);
+      						
+      						}
+      						
+      						
+      						} 
+      					setInterval('auth()',1000);
+      						 
+      						
+      					</script>
   </body>
 </html>

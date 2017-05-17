@@ -7,38 +7,38 @@ import model.*;
 import dao.*;
 public class SupplierService {
 	/**
-	 * 供应商注册的数据库操作
+	 * 渚涘簲鍟嗘敞鍐岀殑鏁版嵁搴撴搷浣�
 	 * @param sModel
 	 * @return
 	 */
 	public int SupplierRegister(SupplierModel sModel){
 		java.sql.Connection conn =null;
-		//获得数据库连接
+		//鑾峰緱鏁版嵁搴撹繛鎺�
 		conn=GetConnection.getConnection();
-		//获得注册信息
+		//鑾峰緱娉ㄥ唽淇℃伅
 		String sName=sModel.getSuppliername();
 		String password=sModel.getSupplierPassword();
-		//查找是否存在重复用户名
-		String sql="select Supplierid from supplier where Suppliername=?";
+		//鏌ユ壘鏄惁瀛樺湪閲嶅鐢ㄦ埛鍚�
+		String sql="select Supplierid from Supplier where Suppliername=?";
 		try {
 			PreparedStatement ps=conn.prepareStatement(sql);
 			ps.setString(1,sName);
 			ResultSet rst=ps.executeQuery();
-			//判断各种情况
+			//鍒ゆ柇鍚勭鎯呭喌
 			if(rst.next()){
 				return -1;
 			}else{
-				//不重复的话向表中插入用户信息
-				sql="insert into supplier(Suppliername,Supplierpassword)values(?,?)";
+				//涓嶉噸澶嶇殑璇濆悜琛ㄤ腑鎻掑叆鐢ㄦ埛淇℃伅
+				sql="insert into Supplier(Suppliername,Supplierpassword)values(?,?)";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, sName);
 				ps.setString(2, password);
 				ps.executeUpdate();
-				sql="select Supplierid from supplier where Suppliername=?";
+				sql="select Supplierid from Supplier where Suppliername=?";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, sName);
 				rst=ps.executeQuery();
-				//获得sid并返回
+				//鑾峰緱sid骞惰繑鍥�
 				if(rst.next()){
 					int sid=rst.getInt("Supplierid");
 					return sid;
@@ -56,23 +56,23 @@ public class SupplierService {
 		return -2;
 	}
 	/**
-	 * 修改商户信息
+	 * 淇敼鍟嗘埛淇℃伅
 	 * @param sModel
 	 * @return
 	 */
 	public SupplierModel SupplierModify(SupplierModel sModel){
 		java.sql.Connection conn =null;
-		//获得数据库连接
+		//鑾峰緱鏁版嵁搴撹繛鎺�
 		conn=GetConnection.getConnection();
-		//提取sid
+		//鎻愬彇sid
 		int sid=sModel.getSupplierid();
 		String sname=null;
 		String stel=null;
 		String sintro=null;
 		String spw=null;
 		String saddr=null;
-		//先取出原有信息
-		String sql="select * from supplier where Supplierid=?";
+		//鍏堝彇鍑哄師鏈変俊鎭�
+		String sql="select * from Supplier where Supplierid=?";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class SupplierService {
 				sintro=rst.getString(5);
 				spw=rst.getString(6);
 			}
-			//判断修改信息是否为null，密码是否为空，为空时不修改
+			//鍒ゆ柇淇敼淇℃伅鏄惁涓簄ull锛屽瘑鐮佹槸鍚︿负绌猴紝涓虹┖鏃朵笉淇敼
 			if(sModel.getSupplieraddress()!=null){
 				saddr=sModel.getSupplieraddress();
 			}
@@ -102,19 +102,19 @@ public class SupplierService {
 			}
 			if(sModel.getSuppliername()!=null&&sModel.getSuppliername()!=""&&sModel.getSuppliername()!=sname){
 				sname=sModel.getSuppliername();
-				sql="select Supplierid from supplier where Suppliername=?";
+				sql="select Supplierid from Supplier where Suppliername=?";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1,sname);
 				rst=ps.executeQuery();
-				//是否重名
+				//鏄惁閲嶅悕
 				if(rst.next()){
 					sModel.setSupplierid(-1);
 					return sModel;
 				}
 				
 			}
-			//更新数据库
-			sql="update supplier set Suppliername=?,Suppliertel=?,Supplieraddress=?,Supplierintroduction=?,SupplierPassword=? where Supplierid=?";
+			//鏇存柊鏁版嵁搴�
+			sql="update Supplier set Suppliername=?,Suppliertel=?,Supplieraddress=?,Supplierintroduction=?,SupplierPassword=? where Supplierid=?";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, sname);
 			ps.setString(2, stel);
@@ -122,7 +122,7 @@ public class SupplierService {
 			ps.setString(4, sintro);
 			ps.setString(5, spw);
 			ps.setInt(6, sid);
-			//将修改后的数据返回
+			//灏嗕慨鏀瑰悗鐨勬暟鎹繑鍥�
 			if(!ps.execute()){
 				sModel.setSuppliername(sname);
 				sModel.setSuppliertel(stel);
@@ -138,7 +138,7 @@ public class SupplierService {
 		}
 		return null;
 	}
-	//����
+	//锟斤拷锟斤拷
 			public boolean SLoginInfoCheck(String Suppliername,String SupplierPassword) throws SQLException {
 				boolean i = false;
 				SupplierModel supplier=new SupplierModel();
@@ -146,14 +146,14 @@ public class SupplierService {
 				supplier.setSuppliername(Suppliername);
 				supplier.setSupplierPassword(SupplierPassword);
 				i=sd.SLoginCheck(supplier);
-				//����SupplierDao�е�SLoginCheck��������֤supplier�����Ƿ���������̼�
+				//锟斤拷锟斤拷SupplierDao锟叫碉拷SLoginCheck锟斤拷锟斤拷锟斤拷锟斤拷证supplier锟斤拷锟斤拷锟角凤拷锟斤拷锟斤拷锟斤拷锟斤拷碳锟�
 				return i;
 			}
 			
 			public SupplierModel getSupplierByName(String Suppliername) throws SQLException {
 				SupplierModel supplier=new SupplierModel();
-				//��Suppliername����supplier������
-				//����SupplierDao��getSupplier(SupplierModel supplier)������ȡ�����̼Ҷ���
+				//锟斤拷Suppliername锟斤拷锟斤拷supplier锟斤拷锟斤拷锟斤拷
+				//锟斤拷锟斤拷SupplierDao锟斤拷getSupplier(SupplierModel supplier)锟斤拷锟斤拷锟斤拷取锟斤拷锟斤拷锟教家讹拷锟斤拷
 				return supplier;
 			}
 	
