@@ -91,8 +91,9 @@ supplier = supplierdao.getSupplierbyid(supplier);
     <div class="product-price">
       <span id = 'price' value = '￥<%= product.getProductprice()*num %>'></span>
       <form action="<%=path%>/confirmOrderController.do"method=post>
+      <input type="hidden" name="product" value="0">
       <%//String productnum=Integer.toString(num); 
-      String[] prolist;
+      //String[] prolist;
       //prolist[0]="0";
       List<ShoppingcartModel> shoplist=new ArrayList<ShoppingcartModel>();
       ShoppingcartModel pro=new ShoppingcartModel();
@@ -102,7 +103,7 @@ supplier = supplierdao.getSupplierbyid(supplier);
       pro.setProductprice(product.getProductprice()*num);
 //session.setAttribute("productnum", num);
 session.setAttribute("user", user);
-session.setAttribute("product", product);
+//session.setAttribute("product", product);
 shoplist.add(pro);	 
 session.setAttribute("shoplist",shoplist);
 %>

@@ -46,13 +46,13 @@ public class ShoppingCartController extends HttpServlet {
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException {
 		ProductModel product = new ProductModel();
-		int shoppingcartid = 0;
-		try{
+		int shoppingcartid;
+		//try{
 			shoppingcartid=Integer.parseInt(request.getParameter("Shoppingcartid"));
-			}
-		catch (NumberFormatException e) {
-		    e.printStackTrace();
-		}
+		//	}
+		//catch (NumberFormatException e) {
+		//    e.printStackTrace();
+		//}
 		ProductDao pd = new ProductDao();
 		ProductInfoService productservice=new ProductInfoService();
 		//product = pd.getProductByProductid(productid);
